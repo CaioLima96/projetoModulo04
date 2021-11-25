@@ -19,15 +19,6 @@ class RoomController {
             })
     }
 
-    // show = (req, res) => {
-    //     this.dbConn.forEach((exp) => {
-    //         if(exp.id == req.params.id) {
-    //             console.log(exp,`\nRota GET "unica" feita com sucesso`)
-    //             res.send(exp)
-    //         }
-    //     })
-    // }
-
     index = (req, res) => {
 
         this.dbConn.getAllRooms().then(
