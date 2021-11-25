@@ -10,7 +10,7 @@ router.use((req, res) => {
     //*res.send('testando');  VAI PRO CONTROLLERS
 })
 
-// ROTAS completas
+// ROTAS
 router.use("/user", userRouter);
 router.use("/booking", bookingRouter);
 router.use("/payment", paymentRouter);
