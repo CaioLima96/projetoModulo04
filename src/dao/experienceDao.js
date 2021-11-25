@@ -1,5 +1,5 @@
 const bd = require('../infra/sqlite-db');
-const { EXPERIENCES_TABLE: TABLE} = require('../util/appConfig')
+const { EXPERIENCES_TABLE: TABLE} = require('../utils/appConfig')
 
 
 class ExperienceDao {
