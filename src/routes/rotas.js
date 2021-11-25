@@ -10,9 +10,7 @@ router.use((req, res) => {
     //*res.send('testando');  VAI PRO CONTROLLERS
 })
 
-
-g
-// ROTAS
+// ROTAS completas
 router.use("/user", userRouter);
 router.use("/booking", bookingRouter);
 router.use("/payment", paymentRouter);
@@ -20,6 +18,8 @@ router.use("/staff", staffRouter);
 router.use("/room", roomRouter);
 router.use("/event", eventRouter);
 router.use("/experience", experienceRouter);
+
+
 
 module.exports = router;
 
