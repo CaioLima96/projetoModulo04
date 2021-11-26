@@ -5,19 +5,18 @@ const roomRouter = require("./roomRouter");
 
 
 //middleware
-router.use(express.json());
-
-router.use((req, res) => {
+router.use((req, res, next) => {
+    next();
     //*res.send('testando');  VAI PRO CONTROLLERS
 })
 
 // ROTAS
-router.use("/user", userRouter);
-router.use("/booking", bookingRouter);
-router.use("/payment", paymentRouter);
-router.use("/staff", staffRouter);
-router.use("/room", roomRouter);
-router.use("/event", eventRouter);
+// router.use("/user", userRouter);
+// router.use("/booking", bookingRouter);
+// router.use("/payment", paymentRouter);
+// router.use("/staff", staffRouter);
+// router.use("/room", roomRouter);
+// router.use("/event", eventRouter);
 router.use("/experience", experienceRouter);
 
 
