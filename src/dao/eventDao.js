@@ -1,5 +1,5 @@
 const bd = require('../infra/sqlite-db');
-const { EXPERIENCES_TABLE: TABLE} = require('../utils/appConfig')
+const { EVENT_TABLE: TABLE} = require('../utils/appConfig')
 
 
 class ExperienceDao {
@@ -7,7 +7,7 @@ class ExperienceDao {
         this.dbConn = dbConn
     }
 
-    getExperienceById = (id) => {
+    getEventById = (id) => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE} WHERE id like ?`,
@@ -24,7 +24,7 @@ class ExperienceDao {
         })
     }
 
-    getAllExperiences = () => {
+    getAllEvents = () => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE}`,
@@ -40,67 +40,72 @@ class ExperienceDao {
         })
     }
 
-    saveUser = (exp) => {
+    saveEvent = (event) => {
         return new Promise((resolve, reject) => {
-          this.dbConn.run(
-            `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            exp.id,
-            exp.nome,
-            exp.valor_exp,
-            exp.id_booking,
-            exp.id_user,
-            exp.duracao,
-            exp.local,
-            exp.data,
-            exp.qtd_pessoas,
-            (error) => {
-                console.log("Rota post feita com sucesso")
-              if (error) {
-                reject("Error: " + error);
-              } else {
-                resolve(true);
-              }
-            }
-          );
+            this.dbConn.run(
+                `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                event.id,
+                event.nome,
+                event.data_inicio,
+                event.data_fim,
+                event.qtd_pessoas,
+                event.valor_event,
+                event.faixa_etaria,
+                event.descricao,
+                event.id_booking,
+                event.id_user,
+                event.local_event,
+                (error) => {
+                    console.log("Rota post feita com sucesso")
+                    if (error) {
+                        reject("Error: " + error);
+                    } else {
+                        resolve(true);
+                    }
+                }
+            );
         });
     }
 
-    deleteExperience = (id) => {
+    deleteEvent = (id) => {
         return new Promise((resolve, reject) => {
-          this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, id, 
-          (error) => {
-            console.log("Rota delete feita com sucesso")
-            if (error) {
-              reject(error);
-            } else {
-              resolve(true);
-            }
+          this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, 
+            id, 
+            (error) => {
+                console.log("Rota delete feita com sucesso")
+                if (error) {
+                reject(error);
+                } else {
+                resolve(true);
+                }
           })
         })
     }
     
-    updateExperience = (id, exp) => {
+    updateEvent = (id, event) => {
         return new Promise((resolve, reject) => {
-          this.dbConn.run(
-            `UPDATE ${TABLE} SET nome = ?, valor_exp = ?, id_booking = ?, id_user = ?, duracao =?, local = ?, data = ?, qtd_pessoas = ? WHERE id = ?`, 
-            exp.nome,
-            exp.valor_exp,
-            exp.id_booking,
-            exp.id_user,
-            exp.duracao,
-            exp.local,
-            exp.data,
-            exp.qtd_pessoas,
-            id,
-            (error) => {
-                console.log("Rota update feita com sucesso")
-              if (error) {
-                reject(error);
-              } else {
-                resolve(true);
-              }
-            }
-          )
+            this.dbConn.run(
+                `UPDATE ${TABLE} SET nome = ?, data_inicio = ?, data_fim = ?, qtd_pessoas = ?, valor_event =?, faixa_etaria = ?, descricao = ?, id_booking = ?, id_user = ?, local_event = ? WHERE id = ?`, 
+                event.nome,
+                event.data_inicio,
+                event.data_fim,
+                event.qtd_pessoas,
+                event.valor_event,
+                event.faixa_etaria,
+                event.descricao,
+                event.id_booking,
+                event.id_user,
+                event.local_event,
+                id,
+                (error) => {
+                    console.log("Rota update feita com sucesso")
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(true);
+                    }
+                }
+            )
         })
     }
 }

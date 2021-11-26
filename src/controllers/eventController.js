@@ -51,9 +51,9 @@ class EventController {
     }
 
     save = (req, res) => {
-        const {nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user } = req.body;
+        const {nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user, local_event } = req.body;
 
-        const event = new EventModel(nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user)
+        const event = new EventModel(nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user, local_event)
 
         this.dbConn
         .saveEvent(event)
