@@ -1,7 +1,7 @@
 const RoomModel = require('../models/roomModel')
 const RoomDao = require('../dao/roomDao')
 
-const {eventDB} = require('../infra/bd')
+const {roomDB} = require('../infra/bd')
 
 class RoomController {
     constructor(dbConn) {
