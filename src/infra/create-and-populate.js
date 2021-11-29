@@ -1,7 +1,9 @@
 /*
 Esse arquivo deve ser executado apenas uma vez para que a o banco seja criado e populado
 */
+const {v4: uuid} = require("uuid")
 const sqlite3 = require('sqlite3').verbose();
+const sha256 = require("js-sha256")
 const db = new sqlite3.Database('src/infra/database.db');
 
 
@@ -101,19 +103,39 @@ function populaTabelaRoom() {
 
 
 //===== EVENT
-const EVENT_SCHEMA = ``
+const EVENT_SCHEMA = `
+CREATE TABLE IF NOT EXISTS "events" (
+    "id" CHAR(36) PRIMARY KEY,
+    "nome" varchar(100),
+    "data_inicio" DATETIME,
+    "data_fim" DATETIME,
+    "qtd_pessoas" SMALLINT(500) NOT NULL,
+    "valor_event" DECIMAL(5,2) NOT NULL,
+    "faixa_etaria" varchar(2),
+    "descricao" varchar(250),
+    "id_booking" CHAR(36),
+    "id_user" CHAR(36),
+    "local_event" varchar(50),
+    FOREIGN KEY(id_booking) REFERENCES booking(id),
+    FOREIGN KEY(id_user) REFERENCES user(id)
+  );
+`
 
-const ADD_EVENT_DATA = ``
+const ADD_EVENT_DATA = `
+INSERT INTO events (id, nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user, local_event)
+VALUES 
+    (' ', 'Ano Novo', '2021-12-31 20:00:00', )
+`
 
 function criaTabelaEvent() {
     db.run(EVENT_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de usuários");
+       if (error) console.log("Erro ao criar tabela de eventos");
     });
 }
 
 function populaTabelaEvent() {
     db.run(ADD_EVENT_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de usuários");
+       if (error) console.log("Erro ao popular tabela de eventos");
     });
 }
 

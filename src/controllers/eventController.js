@@ -115,9 +115,9 @@ class EventController {
             
             let eventUpIndex = await this.dbConn.getEventById(id)[0]
 
-            if(content.id == null ) {
-                content.id = eventUpIndex.id
-            }
+            // if(content.id == null ) {
+            //     content.id = eventUpIndex.id
+            // }
             if(content.nome == null ) {
                 content.nome = eventUpIndex.nome
             }
