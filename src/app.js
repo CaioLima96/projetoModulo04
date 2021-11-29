@@ -1,6 +1,7 @@
 //"puxa" o express
 const express = require('express');
 const app = express();
+
 //puxa as rotas CRUD
 const router = require('./routes/rotas')
 
