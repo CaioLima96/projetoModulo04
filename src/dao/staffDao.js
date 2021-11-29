@@ -1,13 +1,13 @@
 const bd = require('../infra/sqlite-db');
-const { EXPERIENCES_TABLE: TABLE} = require('../utils/appConfig')
+const { ROOMS_TABLE: TABLE} = require('../utils/appConfig')
 
 
-class PaymentDao {
+class StaffDao {
     constructor(dbConn) {
         this.dbConn = dbConn
     }
 
-    getPaymentById = (id) => {
+    getStaffById = (id) => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE} WHERE id like ?`,
@@ -24,12 +24,12 @@ class PaymentDao {
         })
     }
 
-    getAllPayment = () => {
+    getAllStaffs = () => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE}`,
                 (error, results) => {
-                    console.log("Todos os Usuários retornados com sucesso")
+                    console.log("Todos os usuários retornados com sucesso")
                     if(error) {
                         reject("Error: " + error)
                     } else {
@@ -40,14 +40,14 @@ class PaymentDao {
         })
     }
 
-    saveUser = (exp) => {
+    saveUser = (staff) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?)`,
-            exp.id,
-            exp.idUser,
-            exp.idStaff,
-            exp.valorTotal,
+            `INSERT INTO ${TABLE} VALUES (?, ?, ?)`,
+            staff.id,
+            staff.nome,
+            staff.cargo,
+
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -60,7 +60,7 @@ class PaymentDao {
         });
     }
 
-    deletePayment = (id) => {
+    deleteStaff = (id) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, id, 
           (error) => {
@@ -73,15 +73,14 @@ class PaymentDao {
           })
         })
     }
-    
-    updateExperience = (id, payment) => {
+
+    updateExperience = (id, staff) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `UPDATE ${TABLE} SET id = ?, idUser = ?, idStaff = ?, valorTotal  = ?, WHERE id = ? `, 
-            payment.id,
-            payment.idUser,
-            payment.idStaff,
-            payment.valorTotal,
+            `UPDATE ${TABLE} SET nome = ?, staff = ?, cargo = ?, WHERE id = ?`, 
+            staff.nome,
+            staff.staff,
+            staff.cargo,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
@@ -96,5 +95,4 @@ class PaymentDao {
     }
 }
 
-
-module.exports = new PaymentDao(bd)
+module.exports = new StaffDao(bd)
