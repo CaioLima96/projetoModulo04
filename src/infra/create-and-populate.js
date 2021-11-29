@@ -84,19 +84,32 @@ function populaTabelaStaff() {
 
 
 //===== ROOM
-const ROOM_SCHEMA = ``
+const ROOM_SCHEMA = `
+CREATE TABLE IF NOT EXISTS "rooms" (
+    "id" CHAR(36) PRIMARY KEY,
+    "nome_ou_numero" varchar(100),
+    "tipo_de_quarto" varchar(100),
+    "qtd_max_pessoas" SMALLINT(6) NOT NULL,
+    "andar" varchar(2),
+    "status" varchar(100),
+  );
+`
 
-const ADD_ROOM_DATA = ``
+const ADD_ROOM_DATA = `
+INSERT INTO events (id, nome_ou_numero, tipo_de_quarto, qtd__max_pessoas, andar, status)
+VALUES 
+    (' ', '100', 'luxo', '2', '10', 'livre' )
+`
 
 function criaTabelaRoom() {
     db.run(ROOM_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de usuários");
+       if (error) console.log("Erro ao criar tabela de quartos");
     });
 }
 
 function populaTabelaRoom() {
     db.run(ADD_ROOM_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de usuários");
+       if (error) console.log("Erro ao popular tabela de quartos");
     });
 }
 
