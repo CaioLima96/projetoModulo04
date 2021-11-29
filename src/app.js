@@ -9,7 +9,7 @@ const router = require('./routes/rotas')
 
 
 //Porta que o app vai ser rodado
-const {PORT = 3000} = process.env;
+const {PORT = 3000} = process.env.PORT;
 
 
 
