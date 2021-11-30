@@ -44,10 +44,11 @@ class UserDao {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
             `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?)`,
-            user.id,
-            user.idUser,
-            user.idStaff,
-            user.valorTotal,
+            user.nome,
+            user.email,
+            user.senha,
+            user.CPF,
+            user.id_endereco,
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -78,10 +79,11 @@ class UserDao {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
             `UPDATE ${TABLE} SET id = ?, idUser = ?, idStaff = ?, valorTotal  = ?, WHERE id = ? `, 
-            user.id,
-            user.idUser,
-            user.idStaff,
-            user.valorTotal,
+            user.nome,
+            user.email,
+            user.senha,
+            user.CPF,
+            user.id_endereco,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
