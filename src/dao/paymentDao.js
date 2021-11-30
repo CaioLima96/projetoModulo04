@@ -77,11 +77,12 @@ class PaymentDao {
     updateExperience = (id, payment) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `UPDATE ${TABLE} SET id = ?, idUser = ?, idStaff = ?, valorTotal  = ?, WHERE id = ? `, 
+            `UPDATE ${TABLE} SET id = ?, id_user = ?, id_booking = ?, id_staff = ?, valor_total  = ?, WHERE id = ? `, 
             payment.id,
-            payment.idUser,
-            payment.idStaff,
-            payment.valorTotal,
+            payment.id_user,
+            payment.id_booking,
+            payment.id_staff,
+            payment.valor_total,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
