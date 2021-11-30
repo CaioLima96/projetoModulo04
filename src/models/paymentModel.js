@@ -1,11 +1,11 @@
 const { v4: uuid } = require("uuid");
 
 class PaymentModel {
-    constructor(id, idUser, idStaff, valorTotal) {
+    constructor(id, id_user, id_staff, valor_total) {
             this.id = uuid(),
-            this.idUser = idUser,
-            this.idStaff = idStaff,
-            this.valorTotal = valorTotal
+            this.id_user = id_user,
+            this.id_staff = id_staff,
+            this.valor_total = valor_total
     }
 }
 
