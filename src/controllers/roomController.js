@@ -132,8 +132,8 @@ class RoomController {
             if(content.status == null ) {
                 content.status = roomUpIndex.status
             }
-            if(content.status == null ) {
-                content.status = roomUpIndex.valor_quarto
+            if(content.valor_quarto == null ) {
+                content.valor_quarto = roomUpIndex.valor_quarto
             }
 
             await this.dbConn.updateRoom(id, content)
