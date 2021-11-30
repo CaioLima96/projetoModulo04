@@ -9,11 +9,6 @@ const staffRouter = require("./staffRouter");
 //const bookingRouter = require("./bookingRouter");
 
 
-//middleware
-router.use((req, res, next) => {
-    next();
-    //*res.send('testando');  VAI PRO CONTROLLERS
-})
 
 // ROTAS
 router.use("/experience", experienceRouter);
