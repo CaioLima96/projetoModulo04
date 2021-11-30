@@ -2,18 +2,18 @@ const bd = require('../infra/sqlite-db');
 const { ROOMS_TABLE: TABLE} = require('../utils/appConfig')
 
 
-class RoomDao {
+class StaffDao {
     constructor(dbConn) {
         this.dbConn = dbConn
     }
 
-    getRoomById = (id) => {
+    getStaffById = (id) => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE} WHERE id like ?`,
                 id,
                 (error, results) => {
-                    console.log("Usuário unico retornado com sucesso")
+                    console.log("Usuário único retornado com sucesso")
                     if(error) {
                         reject("Error: " + error)
                     } else {
@@ -24,12 +24,12 @@ class RoomDao {
         })
     }
 
-    getAllRooms = () => {
+    getAllStaffs = () => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE}`,
                 (error, results) => {
-                    console.log("Todos os Usuários retornados com sucesso")
+                    console.log("Todos os usuários retornados com sucesso")
                     if(error) {
                         reject("Error: " + error)
                     } else {
@@ -40,16 +40,14 @@ class RoomDao {
         })
     }
 
-    saveRoom = (room) => {
+    saveUser = (staff) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?)`,
-            room.id,
-            room.tipo_de_quarto,
-            room.nome_ou_numero,
-            room.qtd_max_pessoas,
-            room.andar,
-            room.status,
+            `INSERT INTO ${TABLE} VALUES (?, ?, ?)`,
+            staff.id,
+            staff.nome,
+            staff.cargo,
+
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -62,7 +60,7 @@ class RoomDao {
         });
     }
 
-    deleteRoom = (id) => {
+    deleteStaff = (id) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, id, 
           (error) => {
@@ -76,15 +74,13 @@ class RoomDao {
         })
     }
 
-    updateRoom = (id, room) => {
+    updateExperience = (id, staff) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `UPDATE ${TABLE} SET tipo_de_quarto = ?, nome_ou_numero = ?, qtd_max_pessoas = ?, andar = ?, status =?, WHERE id = ?`, 
-            room.tipo_de_quarto,
-            room.nome_ou_numero,
-            room.qtd_max_pessoas,
-            room.andar,
-            room.status,
+            `UPDATE ${TABLE} SET nome = ?, staff = ?, cargo = ?, WHERE id = ?`, 
+            staff.nome,
+            staff.staff,
+            staff.cargo,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
@@ -99,4 +95,4 @@ class RoomDao {
     }
 }
 
-module.exports = new RoomDao(bd)
+module.exports = new StaffDao(bd)

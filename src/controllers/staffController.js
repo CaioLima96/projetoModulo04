@@ -1,16 +1,16 @@
-const paymentModel = require('../../models/paymentModel')
-const paymentDao = require('../../dao/paymentDao')
+const StaffModel = require('../models/staffModel')
+const StaffDao = require('../dao/staffDao')
 
-const {paymentDB} = require('../../infra/bd')
+const {staffDB} = require('../infra/bd')
 
-class paymentController {
+class StaffController {
     constructor(dbConn) {
         this.dbConn = dbConn
     }
 
     show = (req, res) => {
         this.dbConn
-            .getpeymentById(req.params.id)
+            .getStaffById(req.params.id)
             .then((exp) => {
                 res.send(exp)
             })
@@ -21,7 +21,7 @@ class paymentController {
 
     index = (req, res) => {
 
-        this.dbConn.getAllpayments().then(
+        this.dbConn.getAllStaffs().then(
             (result) => {
                 res.send(result)
             }
@@ -33,14 +33,14 @@ class paymentController {
     }
 
     save = (req, res) => {
-        const {id, idUser, idStaff, valorTotal} = req.body;
+        const {id, nome, cargo} = req.body;
 
-        const payment = new RoomModel(id, idUser, idStaff, valorTotal)
+        const staff = new StaffModel(id, nome, cargo)
 
         this.dbConn
-        .saveUser(payment)
-        .then((payment) => {
-            res.send(payment);
+        .saveUser(staff)
+        .then((staff) => {
+            res.send(staff);
         })
         .catch((error) => {
             res.send(error);
@@ -50,7 +50,7 @@ class paymentController {
     remove = (req, res) => {
 
         this.dbConn
-        .deletePayment(req.params.id)
+        .deleteStaff(req.params.id)
         .then((result) => {
             res.send(result);
         })
@@ -65,7 +65,7 @@ class paymentController {
         const content = req.body;
     
         this.dbConn
-          .updatePayment(id, content)
+          .updateStaff(id, content)
           .then((result) => {
             res.send(result);
           })
@@ -75,4 +75,4 @@ class paymentController {
     }
 }
 
-module.exports = new paymentController(paymentDB)
+module.exports = new StaffController(staffDB)
