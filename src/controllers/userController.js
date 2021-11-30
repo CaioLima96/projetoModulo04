@@ -1,7 +1,7 @@
-const UserModel = require('../../models/userModel')
-const UserDao = require('../../dao/userDao')
+const UserModel = require('../models/userModel')
+const UserDao = require('../dao/userDao')
 
-const {usersDB} = require('../../infra/bd')
+const {usersDB} = require('../infra/bd')
 
 class userController {
     constructor(dbConn) {
