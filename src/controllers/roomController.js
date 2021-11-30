@@ -14,14 +14,14 @@ class RoomController {
 
             let roomShow = await this.dbConn.getRoomById(req.params.id)
 
-            if(eventShow.length == 0) {
+            if(roomShow.length == 0) {
                 
                 console.log("Quarto não existe.")
-                res.status(500).send({mensagem: "QUarto não existe."})
+                res.status(500).send({mensagem: "Quarto não existe."})
 
             } else {
 
-                console.log(roomtShow,`\nRota GET "unica" feita com sucesso`)
+                console.log(roomShow,`\nRota GET "unica" feita com sucesso`)
 
                 res.status(200).send({data: roomShow, menssagem: "Quarto retornado com sucesso"})
                 
