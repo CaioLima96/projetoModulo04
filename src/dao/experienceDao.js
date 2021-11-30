@@ -40,19 +40,20 @@ class ExperienceDao {
         })
     }
 
-    saveUser = (exp) => {
+    saveExperience = (exp) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             exp.id,
             exp.nome,
             exp.valor_exp,
             exp.id_booking,
-            exp.id_user,
+            exp.horario,
             exp.duracao,
             exp.local,
-            exp.data,
+            exp.dia_semana,
             exp.qtd_pessoas,
+            exp.descricao,
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -82,15 +83,16 @@ class ExperienceDao {
     updateExperience = (id, exp) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `UPDATE ${TABLE} SET nome = ?, valor_exp = ?, id_booking = ?, id_user = ?, duracao =?, local = ?, data = ?, qtd_pessoas = ? WHERE id = ?`, 
+            `UPDATE ${TABLE} SET nome = ?, valor_exp = ?, id_booking = ?, horario = ?, duracao =?, local = ?, dia_semana = ?, qtd_pessoas = ?, descricao = ? WHERE id = ?`, 
             exp.nome,
             exp.valor_exp,
             exp.id_booking,
-            exp.id_user,
+            exp.horario,
             exp.duracao,
             exp.local,
-            exp.data,
+            exp.dia_semana,
             exp.qtd_pessoas,
+            exp.descricao,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
