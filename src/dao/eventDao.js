@@ -2,7 +2,7 @@ const bd = require('../infra/sqlite-db');
 const { EVENT_TABLE: TABLE} = require('../utils/appConfig')
 
 
-class ExperienceDao {
+class EventDao {
     constructor(dbConn) {
         this.dbConn = dbConn
     }
@@ -111,4 +111,4 @@ class ExperienceDao {
 }
 
 
-module.exports = new ExperienceDao(bd)
+module.exports = new EventDao(bd)

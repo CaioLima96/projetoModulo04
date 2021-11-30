@@ -80,7 +80,7 @@ class EventController {
         }
 
         // this.dbConn.push(event)
-        // res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
+        // res.send("Rota POST de evento ativada: evento adicionado ao banco de dados")
     }
 
     remove = async (req, res) => {
