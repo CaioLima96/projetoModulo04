@@ -8,4 +8,4 @@ class StaffModel {
     }
 }
 
-module.exports = staffModel
+module.exports = StaffModel

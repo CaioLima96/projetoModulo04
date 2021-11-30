@@ -1,5 +1,5 @@
-const staffModel = require('../models/staffModel')
-const staffDao = require('../dao/staffDao')
+const StaffModel = require('../models/staffModel')
+const StaffDao = require('../dao/staffDao')
 
 const {staffDB} = require('../infra/bd')
 

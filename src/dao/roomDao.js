@@ -40,7 +40,7 @@ class RoomDao {
         })
     }
 
-    saveUser = (room) => {
+    saveRoom = (room) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
             `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?)`,
@@ -76,7 +76,7 @@ class RoomDao {
         })
     }
 
-    updateExperience = (id, room) => {
+    updateRoom = (id, room) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
             `UPDATE ${TABLE} SET tipo_de_quarto = ?, nome_ou_numero = ?, qtd_max_pessoas = ?, andar = ?, status =?, WHERE id = ?`, 
