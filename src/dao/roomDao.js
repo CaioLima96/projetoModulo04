@@ -46,10 +46,11 @@ class RoomDao {
             `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?)`,
             room.id,
             room.tipo_de_quarto,
-            room.nome_ou_numero,
+            room.numero,
             room.qtd_max_pessoas,
             room.andar,
             room.status,
+            room.valor_quarto,
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -81,10 +82,11 @@ class RoomDao {
           this.dbConn.run(
             `UPDATE ${TABLE} SET tipo_de_quarto = ?, nome_ou_numero = ?, qtd_max_pessoas = ?, andar = ?, status =?, WHERE id = ?`, 
             room.tipo_de_quarto,
-            room.nome_ou_numero,
+            room.numero,
             room.qtd_max_pessoas,
             room.andar,
             room.status,
+            room.valor_quarto,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")

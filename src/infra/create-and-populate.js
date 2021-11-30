@@ -87,18 +87,19 @@ function populaTabelaStaff() {
 const ROOM_SCHEMA = `
 CREATE TABLE IF NOT EXISTS "rooms" (
     "id" CHAR(36) PRIMARY KEY,
-    "nome_ou_numero" varchar(100),
+    "numero" INTEGER(4) NOT NULL,
     "tipo_de_quarto" varchar(100),
     "qtd_max_pessoas" SMALLINT(6) NOT NULL,
     "andar" varchar(2),
     "status" varchar(100),
+    "valor_quarto" DECIMAL(6,2) NOT NULL
   );
 `
 
 const ADD_ROOM_DATA = `
-INSERT INTO events (id, nome_ou_numero, tipo_de_quarto, qtd__max_pessoas, andar, status)
+INSERT INTO events (id, numero, tipo_de_quarto, qtd__max_pessoas, andar, status, valor_quarto)
 VALUES 
-    (' ', '100', 'luxo', '2', '10', 'livre' )
+    (' ', '100', 'luxo', '2', '10', 'livre', "800.00" )
 `
 
 function criaTabelaRoom() {
@@ -122,7 +123,7 @@ CREATE TABLE IF NOT EXISTS "events" (
     "nome" varchar(100),
     "data_inicio" DATETIME,
     "data_fim" DATETIME,
-    "qtd_pessoas" INTEGER(500) NOT NULL,
+    "qtd_pessoas" INTEGER(5) NOT NULL,
     "valor_event" DECIMAL(6,2) NOT NULL,
     "faixa_etaria" varchar(2),
     "descricao" varchar(250),

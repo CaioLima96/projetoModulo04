@@ -61,9 +61,9 @@ class RoomController {
     }
 
     save = async (req, res) => {
-        const {tipo_de_quarto, nome_ou_numero, qtd_max_pessoas, andar, status } = req.body;
+        const {tipo_de_quarto, numero, qtd_max_pessoas, andar, status, valor_quarto } = req.body;
 
-        const room = new RoomModel(tipo_de_quarto, nome_ou_numero, qtd_max_pessoas, andar, status)
+        const room = new RoomModel(tipo_de_quarto, numero, qtd_max_pessoas, andar, status, valor_quarto)
 
         // try {
             
@@ -121,7 +121,7 @@ class RoomController {
                 content.tipo_de_quarto = roomUpIndex.tipo_de_quarto
             }
             if(content.nome_ou_numero == null ) {
-                content.nome_ou_numero = roomUpIndex.nome_ou_numero
+                content.nome_ou_numero = roomUpIndex.numero
             }
             if(content.qtd_max_pessoas == null ) {
                 content.qtd_max_pessoas = roomUpIndex.qtd_max_pessoas
@@ -131,6 +131,9 @@ class RoomController {
             }
             if(content.status == null ) {
                 content.status = roomUpIndex.status
+            }
+            if(content.status == null ) {
+                content.status = roomUpIndex.valor_quarto
             }
 
             await this.dbConn.updateRoom(id, content)
