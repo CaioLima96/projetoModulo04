@@ -44,10 +44,10 @@ class PaymentDao {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
             `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?)`,
-            exp.id,
-            exp.idUser,
-            exp.idStaff,
-            exp.valorTotal,
+            exp.id_user,
+            exp.id_booking,
+            exp.id_staff,
+            exp.valor_total,
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -77,11 +77,11 @@ class PaymentDao {
     updateExperience = (id, payment) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `UPDATE ${TABLE} SET id = ?, idUser = ?, idStaff = ?, valorTotal  = ?, WHERE id = ? `, 
-            payment.id,
-            payment.idUser,
-            payment.idStaff,
-            payment.valorTotal,
+            `UPDATE ${TABLE} SET id_user = ?, id_booking = ?, id_staff = ?, valor_total  = ?, WHERE id = ? `, 
+            payment.id_user,
+            payment.id_booking,
+            payment.id_staff,
+            payment.valor_total,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
