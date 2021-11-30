@@ -1,7 +1,7 @@
-const StaffModel = require('../../models/staffModel')
-const StaffDao = require('../../dao/staffDao')
+const StaffModel = require('../models/staffModel')
+const StaffDao = require('../dao/staffDao')
 
-const {staffDB} = require('../../infra/bd')
+const {staffDB} = require('../infra/bd')
 
 class StaffController {
     constructor(dbConn) {
@@ -75,4 +75,4 @@ class StaffController {
     }
 }
 
-module.exports = new StaffController(RoomDB)
+module.exports = new StaffController(staffDB)

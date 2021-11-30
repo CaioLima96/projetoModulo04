@@ -12,7 +12,7 @@ class RoomController {
 
         try {
 
-            let roomShow = await this.dbConn.getEventById(req.params.id)
+            let roomShow = await this.dbConn.getRoomById(req.params.id)
 
             if(eventShow.length == 0) {
                 
@@ -44,20 +44,20 @@ class RoomController {
 
     index = async (req, res) => {
 
-        try {
+        // try {
             
-            let roomIndex = await this.dbConn.getAllEvents()
+        //     let roomIndex = await this.dbConn.getRoomById()
             
-            res.status(200).send({data: roomIndex, mensagem: "Quartos retornados com sucesso"})
+        //     res.status(200).send({data: roomIndex, mensagem: "Quartos retornados com sucesso"})
             
-        } catch (error) {
+        // } catch (error) {
 
-            console.log('Erro da requisição: ' + error)
-            res.status(500).json(error)
-        }
+        //     console.log('Erro da requisição: ' + error)
+        //     res.status(500).json(error)
+        // }
 
 
-        //res.send(this.dbConn)
+        res.send(this.dbConn)
     }
 
     save = async (req, res) => {
@@ -65,30 +65,29 @@ class RoomController {
 
         const room = new RoomModel(tipo_de_quarto, nome_ou_numero, qtd_max_pessoas, andar, status)
 
-        try {
+        // try {
             
-            await this.dbConn.saveRoom(room)
+        //     await this.dbConn.saveRoom(room)
 
-            res.status(201).send({menssage: "Quarto salvo com sucesso"})
+        //     res.status(201).send({menssage: "Quarto salvo com sucesso"})
 
-        } catch (error) {
+        // } catch (error) {
             
-            console.log('Erro da requisição: ' + error)
+        //     console.log('Erro da requisição: ' + error)
 
-            res.status(500).json(error)
+        //     res.status(500).json(error)
 
-        }
+        // }
 
-        // this.dbConn.push(event)
-        // res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
+        this.dbConn.push(room)
+        res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
     }
 
     remove = async (req, res) => {
 
         try {
             
-            await this.dbConn
-            .deleteRoom(req.params.id)
+            await this.dbConn.deleteRoom(req.params.id)
 
             res.status(200).send({ mensagem: "Quarto apagado com sucesso"})
 
