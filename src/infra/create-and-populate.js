@@ -8,6 +8,7 @@ const db = new sqlite3.Database('src/infra/database.db');
 
 
 //===== USERS
+
 const USERS_SCHEMA = ``
 
 const ADD_USERS_DATA = ``
@@ -20,44 +21,6 @@ function criaTabelaUser() {
 
 function populaTabelaUser() {
     db.run(ADD_USERS_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de usuários");
-    });
-}
-
-
-
-//===== BOOKING
-const BOOKING_SCHEMA = ``
-
-const  ADD_BOOKING_DATA = ``
-
-function criaTabelaBooking() {
-    db.run(BOOKING_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de usuários");
-    });
-}
-
-function populaTabelaBooking() {
-    db.run(ADD_BOOKING_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de usuários");
-    });
-}
-
-
-
-//===== PAYMENT
-const PAYMENT_SCHEMA = ``
-
-const ADD_PAYMENT_DATA = ``
-
-function criaTabelaPayment() {
-    db.run(ADD_PAYMENT_DATA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de usuários");
-    });
-}
-
-function populaTabelaPayment() {
-    db.run(PAYMENT_SCHEMA, (error)=> {
        if (error) console.log("Erro ao popular tabela de usuários");
     });
 }
@@ -86,13 +49,13 @@ function populaTabelaStaff() {
 //===== ROOM
 
 const ROOM_SCHEMA = `
-    CREATE TABLE IF NOT EXISTS "rooms" (
+    CREATE TABLE IF NOT EXISTS "" (
         "id" CHAR(36) PRIMARY KEY,
-        "tipo_de_quarto" varchar(100),
+        "tipo_de_quarto" VARCHAR(100),
         "numero" INTEGER(4),
         "qtd_max_pessoas" INTEGER(6) ,
         "andar" INTEGER(2),
-        "status" varchar(100),
+        "status" VARCHAR(100),
         "valor_quarto" DECIMAL(6,2)
     );
 `
@@ -105,10 +68,10 @@ room_id_4 = uuid();
 const ADD_ROOM_DATA = `
     INSERT INTO events (id, tipo_de_quarto, numero, qtd__max_pessoas, andar, status, valor_quarto)
     VALUES 
-        ('${room_id_1}', 'casal simples', 010, 02, 01, 'livre', 300.00)
-        ('${room_id_2}', 'triplo', 022, 03, 02, ocupado, 400.00)
-        ('${room_id_3}', 'duplo', 014, 01, ocupado, 300.00)
-        ('${room_id_4}', 'casal luxo', 101, 02, 10, 800.00)
+        ('${room_id_1}', 'casal simples', 010, 02, 01, 'livre', 300.00),
+        ('${room_id_2}', 'triplo', 022, 03, 02, 'Ocupado', 400.00),
+        ('${room_id_3}', 'duplo', 014, 01, 'Ocupado', 300.00),
+        ('${room_id_4}', 'casal luxo', 101, 02, 10, 'Livre', 800.00)
 `
 
 function criaTabelaRoom() {
@@ -126,29 +89,38 @@ function populaTabelaRoom() {
 
 
 //===== EVENT
+
 const EVENT_SCHEMA = `
-CREATE TABLE IF NOT EXISTS "events" (
-    "id" CHAR(36) PRIMARY KEY,
-    "nome" varchar(100),
-    "data_inicio" DATETIME,
-    "data_fim" DATETIME,
-    "qtd_pessoas" INTEGER(5) NOT NULL,
-    "valor_event" DECIMAL(6,2) NOT NULL,
-    "faixa_etaria" varchar(2),
-    "descricao" varchar(250),
-    "id_booking" CHAR(36),
-    "id_user" CHAR(36),
-    "local_event" varchar(50),
-    "duracao" varchar(15),
-    FOREIGN KEY(id_booking) REFERENCES booking(id),
-    FOREIGN KEY(id_user) REFERENCES user(id)
-  );
+    CREATE TABLE IF NOT EXISTS "events" (
+        "id" CHAR(36) PRIMARY KEY,
+        "nome" VARCHAR(150),
+        "data_inicio" DATETIME,
+        "data_fim" DATETIME,
+        "qtd_pessoas" INTEGER(5),
+        "valor_event" DECIMAL(6,2),
+        "faixa_etaria" VARCHAR(2),
+        "descricao" VARCHAR(500),
+        "duracao" VARCHAR(15),
+        "local_event" VARCHAR(50)
+    );
 `
 
+event_id_1 = uuid()
+event_id_2 = uuid()
+event_id_3 = uuid()
+event_id_4 = uuid()
+
 const ADD_EVENT_DATA = `
-INSERT INTO events (id, nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user, local_event)
-VALUES 
-    (' ', 'Ano Novo', '2021-12-31 20:00:00', )
+    INSERT INTO events (id, nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event)
+    VALUES 
+        ('${event_id_1}', 'Colônia de férias', '2022-01-05 10:30:00', '2022-01-15 10:30:00', 280, 200.00, '12+', 'Atividades programadas, recreativas esportiva e, jantares em família.', '10 dias', 'Área externa'),
+
+        ('${event_id_2}', 'Festa tradicional da cidade', '2022-02-13 13:00:00', '2022-02-16 22:00:00', 180, 60.00, 'Livre', 'Venha comemorar o aniversário da nossa cidade com comidas típicas e muito mais.', '3 dias', 'Salão'),
+
+        ('${event_id_3}', 'Eventos corporativos', '2022-03-14 15:00:00', 2022-03-18 20:00:00', 400, 200.00, '18+', 'Atividades como convenções, treinamentos, reuniões e kick-off.', '4 dias', 'Salão'),
+
+        ('${event_id_4}', 'Cursos e workshops', '2022-03-20 10:00:00', '2022-04-05 16:00:00', 400, 150.00, '14+', 'Dursos e workshops de gastronomia com chefs renomados', '17 dias', 'Salão' )
+        
 `
 
 function criaTabelaEvent() {
@@ -166,6 +138,7 @@ function populaTabelaEvent() {
 
 
 //===== EXPERIENCES
+
 const EXPERIENCES_SCHEMA = ``
 
 const ADD_EXPERIENCES_DATA = ``
@@ -181,6 +154,48 @@ function populaTabelaExperience() {
        if (error) console.log("Erro ao popular tabela de usuários");
     });
 }
+
+
+
+//===== BOOKING
+
+const BOOKING_SCHEMA = ``
+
+const  ADD_BOOKING_DATA = ``
+
+function criaTabelaBooking() {
+    db.run(BOOKING_SCHEMA, (error)=> {
+       if (error) console.log("Erro ao criar tabela de usuários");
+    });
+}
+
+function populaTabelaBooking() {
+    db.run(ADD_BOOKING_DATA, (error)=> {
+       if (error) console.log("Erro ao popular tabela de usuários");
+    });
+}
+
+
+
+//===== PAYMENT
+
+const PAYMENT_SCHEMA = ``
+
+const ADD_PAYMENT_DATA = ``
+
+function criaTabelaPayment() {
+    db.run(ADD_PAYMENT_DATA, (error)=> {
+       if (error) console.log("Erro ao criar tabela de usuários");
+    });
+}
+
+function populaTabelaPayment() {
+    db.run(PAYMENT_SCHEMA, (error)=> {
+       if (error) console.log("Erro ao popular tabela de usuários");
+    });
+}
+
+
 
 
 db.serialize( ()=> {
