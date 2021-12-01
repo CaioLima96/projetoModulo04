@@ -48,7 +48,7 @@ class UserDao {
             user.email,
             user.senha,
             user.CPF,
-            user.id_endereco,
+            user.id_adress,
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -83,7 +83,7 @@ class UserDao {
             user.email,
             user.senha,
             user.CPF,
-            user.id_endereco,
+            user.id_adress,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
