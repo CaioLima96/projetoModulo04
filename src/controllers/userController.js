@@ -2,6 +2,7 @@ const UserModel = require('../models/userModel')
 const UserDao = require('../dao/userDao')
 
 const {usersDB} = require('../infra/bd')
+const sha256 = require("js-sha256");
 
 class userController {
     constructor(dbConn) {

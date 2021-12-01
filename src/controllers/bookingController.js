@@ -12,18 +12,18 @@ class BookingController {
         
         // try {
 
-        //     let expShow = await this.dbConn.getBookingById(req.params.id)
+        //     let bookShow = await this.dbConn.getBookingById(req.params.id)
 
-        //     if(expShow.length == 0) {
+        //     if(bookShow.length == 0) {
 
         //         console.log("Reserva não existe.")
         //         res.status(500).send({mensagem: "Reserva não existe."})
 
         //     } else {
 
-        //         console.log(BookShow,`\nRota GET "unica" feita com sucesso`)
+        //         console.log(bookShow,`\nRota GET "unica" feita com sucesso`)
 
-        //         res.status(200).send({data: BookShow, menssagem: "Evento retornado com sucesso"})
+        //         res.status(200).send({data: bookShow, menssagem: "Reserva retornada com sucesso"})
                 
         //     }
         // } catch (error) {
@@ -45,9 +45,9 @@ class BookingController {
 
         // try {
             
-        //     let expIndex = await this.dbConn.getAllBooking()
+        //     let bookIndex = await this.dbConn.getAllBooking()
 
-        //     res.status(200).send({data: expIndex, mensagem: "Reservas retornadas com sucesso"})
+        //     res.status(200).send({data: bookIndex, mensagem: "Reservas retornadas com sucesso"})
 
         // } catch (error) {
             
