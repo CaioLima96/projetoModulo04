@@ -59,9 +59,9 @@ class BookingController {
     }
 
     save = async (req, res) => {
-        const {id_user, id_room, data_entrada, data_saida, user_event_id, user_experience_id, valor_total} = req.body;
+        const {id_user, id_room, qtd_pessoas, data_entrada, data_saida, user_event_id, user_experience_id, valor_total} = req.body;
 
-        const booking = new BookingModel(id_user, id_room, data_entrada, data_saida, user_event_id, user_experience_id, valor_total)
+        const booking = new BookingModel(id_user, id_room, qtd_pessoas, data_entrada, data_saida, user_event_id, user_experience_id, valor_total)
 
         // try {
             
@@ -118,6 +118,9 @@ class BookingController {
         //     if(content.id_room == null) {
         //         content.id_room = bookUpIndex.id_room
         //     }
+        //     if(content.qtd_pessoas == null) {
+        //         content.qtd_pessoas = bookUpIndex.qtd_pessoas
+        //     }
         //     if(content.data_entrada == null) {
         //         content.data_entrada = bookUpIndex.data_entrada
         //     }
@@ -150,6 +153,7 @@ class BookingController {
             id: id,
             id_user: content.id_user,
             id_room: content.id_room,
+            qtd_pessoas: content.qtd_pessoas,
             data_entrada: content.data_entrada,
             data_saida: content.data_saida,
             user_event_id: content.user_event_id,
