@@ -61,9 +61,9 @@ class EventController {
     }
 
     save = async (req, res) => {
-        const {nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user, local_event } = req.body;
+        const {nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event } = req.body;
 
-        const event = new EventModel(nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user, local_event)
+        const event = new EventModel(nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event)
 
         try {
             
@@ -111,63 +111,67 @@ class EventController {
         const id = req.params.id;
         const content = req.body;
 
-        try {
+        // try {
             
-            let eventUpIndex = await this.dbConn.getEventById(id)[0]
+        //     let eventUpIndex = await this.dbConn.getEventById(id)[0]
 
-            // if(content.id == null ) {
-            //     content.id = eventUpIndex.id
-            // }
-            if(content.nome == null ) {
-                content.nome = eventUpIndex.nome
-            }
-            if(content.data_inicio == null ) {
-                content.data_inicio = eventUpIndex.data_inicio
-            }
-            if(content.data_fim == null ) {
-                content.data_fim = eventUpIndex.data_fim
-            }
-            if(content.qtd_pessoas == null ) {
-                content.qtd_pessoas = eventUpIndex.qtd_pessoas
-            }
-            if(content.valor_event == null ) {
-                content.valor_event = eventUpIndex.valor_event
-            }
-            if(content.faixa_etaria == null ) {
-                content.faixa_etaria = eventUpIndex.faixa_etaria
-            }
-            if(content.descricao == null ) {
-                content.descricao = eventUpIndex.descricao
-            }
-            if(content.id_booking == null ) {
-                content.id_booking = eventUpIndex.id_booking
-            }
-            if(content.id_user == null ) {
-                content.id_user = eventUpIndex.id_user
-            }
-            if(content.local_event == null ) {
-                content.local_event = eventUpIndex.local_event
-            }
-
-            await this.dbConn.updateEvent(id, content)
-
-            res.status(200).send({ mensagem: "Evento atualizado com sucesso"})
-
-        } catch (error) {
-
-            res.status(500).json(error)
-
-        }
-
-        // const id = req.params.id
-        // const content = req.body
-
-        // for (let i =0; i < this.dbConn.length; i++) {
-        //     if(this.dbConn[i].id = id) {
-        //         this.dbConn[i] = content
+        //     if(content.nome == null ) {
+        //         content.nome = eventUpIndex.nome
         //     }
+        //     if(content.data_inicio == null ) {
+        //         content.data_inicio = eventUpIndex.data_inicio
+        //     }
+        //     if(content.data_fim == null ) {
+        //         content.data_fim = eventUpIndex.data_fim
+        //     }
+        //     if(content.qtd_pessoas == null ) {
+        //         content.qtd_pessoas = eventUpIndex.qtd_pessoas
+        //     }
+        //     if(content.valor_event == null ) {
+        //         content.valor_event = eventUpIndex.valor_event
+        //     }
+        //     if(content.faixa_etaria == null ) {
+        //         content.faixa_etaria = eventUpIndex.faixa_etaria
+        //     }
+        //     if(content.descricao == null ) {
+        //         content.descricao = eventUpIndex.descricao
+        //     }
+        //     if(content.duracao == null){
+        //         content.duracao = eventUpIndex.duracao
+        //     }
+        //     if(content.local_event == null ) {
+        //         content.local_event = eventUpIndex.local_event
+        //     }
+
+        //     await this.dbConn.updateEvent(id, content)
+
+        //     res.status(200).send({ mensagem: "Evento atualizado com sucesso"})
+
+        // } catch (error) {
+
+        //     res.status(500).json(error)
+
         // }
-        // res.send(`Task: ${id} modificado com sucesso`)
+
+        let eventObj = {
+            id: id,
+            nome: content.nome,
+            data_inicio: content.data_inicio,
+            data_fim: content.data_fim,
+            qtd_pessoas: content.qtd_pessoas,
+            valor_event: content.valor_event,
+            faixa_etaria: content.faixa_etaria,
+            descricao: content.descricao,
+            duracao: content.duracao,
+            local_event: content.local_event
+        }
+        
+        for (let i =0; i < this.dbConn.length; i++) {
+            if(this.dbConn[i].id = id) {
+                this.dbConn[i] = eventObj
+            }
+        }
+        res.send(`Task: ${id} modificado com sucesso`)
     }
 }
 
