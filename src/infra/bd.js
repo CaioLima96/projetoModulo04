@@ -5,5 +5,6 @@ module.exports = {
     staffDB: [],
     roomDB: [],
     eventDB: [],
-    experienceDB: []
+    experienceDB: [],
+    addressDB: []
 }
