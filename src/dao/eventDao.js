@@ -43,7 +43,7 @@ class EventDao {
     saveEvent = (event) => {
         return new Promise((resolve, reject) => {
             this.dbConn.run(
-                `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 event.id,
                 event.nome,
                 event.data_inicio,
@@ -52,8 +52,7 @@ class EventDao {
                 event.valor_event,
                 event.faixa_etaria,
                 event.descricao,
-                event.id_booking,
-                event.id_user,
+                event.duracao,
                 event.local_event,
                 (error) => {
                     console.log("Rota post feita com sucesso")
@@ -85,7 +84,7 @@ class EventDao {
     updateEvent = (id, event) => {
         return new Promise((resolve, reject) => {
             this.dbConn.run(
-                `UPDATE ${TABLE} SET nome = ?, data_inicio = ?, data_fim = ?, qtd_pessoas = ?, valor_event =?, faixa_etaria = ?, descricao = ?, id_booking = ?, id_user = ?, local_event = ? WHERE id = ?`, 
+                `UPDATE ${TABLE} SET nome = ?, data_inicio = ?, data_fim = ?, qtd_pessoas = ?, valor_event =?, faixa_etaria = ?, descricao = ?, duracao = ?, local_event = ? WHERE id = ?`, 
                 event.nome,
                 event.data_inicio,
                 event.data_fim,
@@ -93,8 +92,7 @@ class EventDao {
                 event.valor_event,
                 event.faixa_etaria,
                 event.descricao,
-                event.id_booking,
-                event.id_user,
+                event.duracao,
                 event.local_event,
                 id,
                 (error) => {

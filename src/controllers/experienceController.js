@@ -59,9 +59,9 @@ class ExperienceController {
     }
 
     save = async (req, res) => {
-        const {nome, valor_exp, id_booking, horario,duracao, local, dia_semana, qtd_pessoas, descricao} = req.body;
+        const {nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao} = req.body;
 
-        const experience = new ExperienceModel(nome, valor_exp, id_booking, horario,duracao, local, dia_semana, qtd_pessoas, descricao)
+        const experience = new ExperienceModel(nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao)
 
         // try {
             
@@ -118,17 +118,14 @@ class ExperienceController {
         //     if(content.valor_exp == null) {
         //         content.valor_exp = expUpIndex.valor_exp
         //     }
-        //     if(content.id_booking == null) {
-        //         content.id_booking = expUpIndex.id_booking
-        //     }
         //     if(content.horario == null) {
         //         content.horario = expUpIndex.horario
         //     }
         //     if(content.duracao == null) {
         //         content.duracao = expUpIndex.duracao
         //     }
-        //     if(content.local == null) {
-        //         content.local = expUpIndex.local
+        //     if(content.local_experience == null) {
+        //         content.local_experience = expUpIndex.local_experience
         //     }
         //     if(content.dia_semana == null) {
         //         content.dia_semana = expUpIndex.dia_semana
@@ -150,17 +147,14 @@ class ExperienceController {
 
         // }
 
-        // const id = req.params.id
-        // const content = req.body
 
         let experienceObj = {
             id: id,
             nome: content.nome,
             valor_exp: content.valor_exp,
-            id_booking: content.id_booking,
             horario: content.horario,
             duracao: content.duracao,
-            local: content.local,
+            local_experience: content.local_experience,
             dia_semana: content.dia_semana,
             qtd_pessoas: content.qtd_pessoas,
             descricao: content.descricao
