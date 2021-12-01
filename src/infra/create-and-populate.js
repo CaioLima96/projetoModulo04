@@ -15,13 +15,13 @@ const ADD_USERS_DATA = ``
 
 function criaTabelaUser() {
     db.run(USERS_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de usuários");
+       if (error) console.log("Erro ao criar tabela de usuários", error);
     });
 }
 
 function populaTabelaUser() {
     db.run(ADD_USERS_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de usuários");
+       if (error) console.log("Erro ao popular tabela de usuários", error);
     });
 }
 
@@ -34,13 +34,13 @@ const ADD_STAFF_DATA = ``
 
 function criaTabelaStaff() {
     db.run(STAFF_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de staff");
+       if (error) console.log("Erro ao criar tabela de staff", error);
     });
 }
 
 function populaTabelaStaff() {
     db.run(ADD_STAFF_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de staff");
+       if (error) console.log("Erro ao popular tabela de staff", error);
     });
 }
 
@@ -49,7 +49,7 @@ function populaTabelaStaff() {
 //===== ROOM
 
 const ROOM_SCHEMA = `
-    CREATE TABLE IF NOT EXISTS "" (
+    CREATE TABLE IF NOT EXISTS "rooms" (
         "id" CHAR(36) PRIMARY KEY,
         "tipo_de_quarto" VARCHAR(100),
         "numero" INTEGER(4),
@@ -66,7 +66,7 @@ room_id_3 = uuid();
 room_id_4 = uuid();
 
 const ADD_ROOM_DATA = `
-    INSERT INTO events (id, tipo_de_quarto, numero, qtd__max_pessoas, andar, status, valor_quarto)
+    INSERT INTO rooms (id, tipo_de_quarto, numero, qtd__max_pessoas, andar, status, valor_quarto)
     VALUES 
         ('${room_id_1}', 'casal simples', 010, 02, 01, 'livre', 300.00),
         ('${room_id_2}', 'triplo', 022, 03, 02, 'Ocupado', 400.00),
@@ -76,13 +76,13 @@ const ADD_ROOM_DATA = `
 
 function criaTabelaRoom() {
     db.run(ROOM_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de quartos");
+       if (error) console.log("Erro ao criar tabela de quartos", error);
     });
 }
 
 function populaTabelaRoom() {
     db.run(ADD_ROOM_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de quartos");
+       if (error) console.log("Erro ao popular tabela de quartos", error);
     });
 }
 
@@ -124,13 +124,13 @@ const ADD_EVENT_DATA = `
 
 function criaTabelaEvent() {
     db.run(EVENT_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de eventos");
+       if (error) console.log("Erro ao criar tabela de eventos", error);
     });
 }
 
 function populaTabelaEvent() {
     db.run(ADD_EVENT_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de eventos");
+       if (error) console.log("Erro ao popular tabela de eventos", error);
     });
 }
 
@@ -168,13 +168,13 @@ const ADD_EXPERIENCES_DATA = `
 
 function criaTabelaExperience() {
     db.run(EXPERIENCES_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de experiência");
+       if (error) console.log("Erro ao criar tabela de experiência", error);
     });
 }
 
 function populaTabelaExperience() {
     db.run(ADD_EXPERIENCES_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de experiência");
+       if (error) console.log("Erro ao popular tabela de experiência", error);
     });
 }
 
@@ -182,19 +182,31 @@ function populaTabelaExperience() {
 
 //===== USER EVENT
 
-const USER_EVENT_SCHEMA = ``
+const USER_EVENT_SCHEMA = `
+    CREATE TABLE IF NOT EXISTS "user_events" (
+        "user_id" CHAR(36),
+        "event_id" CHAR(36),
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(event_id) REFERENCES events(id)
+    );
+`
 
-const  ADD_USER_EVENT_DATA = ``
+const  ADD_USER_EVENT_DATA = `
+    INSERT INTO user_events (user_id, event_id)
+    VALUES
+        ()
 
-function criaTabelaBooking() {
+`
+
+function criaTabelaUserEvents() {
     db.run(USER_EVENT_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de user_event");
+       if (error) console.log("Erro ao criar tabela de user_event", error);
     });
 }
 
-function populaTabelaBooking() {
+function populaTabelaUserEvents() {
     db.run(ADD_USER_EVENT_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de user_event");
+       if (error) console.log("Erro ao popular tabela de user_event", error);
     });
 }
 
@@ -202,19 +214,30 @@ function populaTabelaBooking() {
 
 //===== USER EXPERIENCE
 
-const USER_EXPERIENCE_SCHEMA = ``
+const USER_EXPERIENCE_SCHEMA =  `
+    CREATE TABLE IF NOT EXISTS "user_experiences" (
+        "user_id" CHAR(36),
+        "experience_id" CHAR(36),
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(experience_id) REFERENCES experiences(id)
+    );
+`
 
-const  ADD_USER_EXPERIENCE_DATA = ``
+const  ADD_USER_EXPERIENCE_DATA = `
+    INSERT INTO user_experiences (user_id, experience_id)
+    VALUES
+        ()
+`
 
-function criaTabelaBooking() {
+function criaTabelaUserExperience() {
     db.run(USER_EXPERIENCE_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de user_experience");
+       if (error) console.log("Erro ao criar tabela de user_experience", error);
     });
 }
 
-function populaTabelaBooking() {
+function populaTabelaUserExperience() {
     db.run(ADD_USER_EXPERIENCE_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de user_experience");
+       if (error) console.log("Erro ao popular tabela de user_experience", error);
     });
 }
 
@@ -228,13 +251,13 @@ const  ADD_BOOKING_DATA = ``
 
 function criaTabelaBooking() {
     db.run(BOOKING_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de booking");
+       if (error) console.log("Erro ao criar tabela de booking", error);
     });
 }
 
 function populaTabelaBooking() {
     db.run(ADD_BOOKING_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de booking");
+       if (error) console.log("Erro ao popular tabela de booking", error);
     });
 }
 
@@ -248,13 +271,13 @@ const ADD_PAYMENT_DATA = ``
 
 function criaTabelaPayment() {
     db.run(ADD_PAYMENT_DATA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de payment");
+       if (error) console.log("Erro ao criar tabela de payment", error);
     });
 }
 
 function populaTabelaPayment() {
     db.run(PAYMENT_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de payment");
+       if (error) console.log("Erro ao popular tabela de payment", error);
     });
 }
 
@@ -264,16 +287,28 @@ function populaTabelaPayment() {
 db.serialize( ()=> {
     criaTabelaUser()
     populaTabelaUser()
+
     criaTabelaStaff()
     populaTabelaStaff()
+
     criaTabelaRoom()
     populaTabelaRoom()
+
     criaTabelaEvent()
     populaTabelaEvent()
+
     criaTabelaExperience()
     populaTabelaExperience()
+
+    criaTabelaUserEvents()
+    populaTabelaUserEvents()
+
+    criaTabelaUserExperience()
+    populaTabelaUserExperience()
+
     criaTabelaBooking()
     populaTabelaBooking()
+
     criaTabelaPayment()
     populaTabelaPayment()
 });
