@@ -10,54 +10,54 @@ class userController {
 
     show = async (req, res) => {
 
-        try {
+        // try {
 
-            let userShow = await this.dbConn.getUserById(req.params.id)
+        //     let userShow = await this.dbConn.getUserById(req.params.id)
 
-            if(userShow.length == 0) {
+        //     if(userShow.length == 0) {
                 
-                console.log("Pagamento não encontrado.")
-                res.status(500).send({mensagem: "Pagamento não encontrado."})
+        //         console.log("Pagamento não encontrado.")
+        //         res.status(500).send({mensagem: "Pagamento não encontrado."})
 
-            } else {
+        //     } else {
 
-                console.log(userShow,`\nRota GET "unica" feita com sucesso`)
+        //         console.log(userShow,`\nRota GET "unica" feita com sucesso`)
 
-                res.status(200).send({data: userShow, menssagem: "Pagamento encontrado!"})
+        //         res.status(200).send({data: userShow, menssagem: "Pagamento encontrado!"})
                 
-            }
-
-        } catch (error) {
-
-            console.log('Erro da requisição: ' + error)
-            res.status(500).json(error)
-
-        }
-
-        // this.dbConn.forEach((payment) => {
-        //     if(payment.id == req.params.id) {
-        //         console.log(payment,`\nRota GET "unica" feita com sucesso`)
-        //         res.send(payment)
         //     }
-        // })
+
+        // } catch (error) {
+
+        //     console.log('Erro da requisição: ' + error)
+        //     res.status(500).json(error)
+
+        // }
+
+        this.dbConn.forEach((payment) => {
+            if(payment.id == req.params.id) {
+                console.log(payment,`\nRota GET "unica" feita com sucesso`)
+                res.send(payment)
+            }
+        })
     }
 
     index = async (req, res) => {
 
-        try {
+        // try {
             
-            let userIndex = await this.dbConn.getAllUsers()
+        //     let userIndex = await this.dbConn.getAllUsers()
             
-            res.status(200).send({data: userIndex, mensagem: "Usuário retornados com sucesso"})
+        //     res.status(200).send({data: userIndex, mensagem: "Usuário retornados com sucesso"})
             
-        } catch (error) {
+        // } catch (error) {
 
-            console.log('Erro da requisição: ' + error)
-            res.status(500).json(error)
-        }
+        //     console.log('Erro da requisição: ' + error)
+        //     res.status(500).json(error)
+        // }
 
 
-        //res.send(this.dbConn)
+        res.send(this.dbConn)
     }
 
     save = async (req, res) => {
@@ -65,46 +65,46 @@ class userController {
 
         const user = new UserModel(nome, email, senha, CPF, id_adress)
 
-        try {
+        // try {
             
-            await this.dbConn.saveUser(user)
+        //     await this.dbConn.saveUser(user)
 
-            res.status(201).send({menssage: "Usuário cadastrado com sucesso!"})
+        //     res.status(201).send({menssage: "Usuário cadastrado com sucesso!"})
 
-        } catch (error) {
+        // } catch (error) {
             
-            console.log('Erro da requisição: ' + error)
+        //     console.log('Erro da requisição: ' + error)
 
-            res.status(500).json(error)
+        //     res.status(500).json(error)
 
-        }
+        // }
 
-        // this.dbConn.push(payment)
-        // res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
+        this.dbConn.push(user)
+        res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
     }
 
     remove = async (req, res) => {
 
-        try {
+        // try {
             
-            await this.dbConn
-            .deleteUser(req.params.id)
+        //     await this.dbConn
+        //     .deleteUser(req.params.id)
 
-            res.status(200).send({ mensagem: "Usuário apagado"})
+        //     res.status(200).send({ mensagem: "Usuário apagado"})
 
-        } catch (error) {
+        // } catch (error) {
 
-            console.log('Erro da requisição: ' + error)
-            res.status(500).json(error)
+        //     console.log('Erro da requisição: ' + error)
+        //     res.status(500).json(error)
 
-        }
+        // }
         
-        // const id = req.params.id
-        // this.dbConn = this.dbConn.filter((i) => {
+        const id = req.params.id
+        this.dbConn = this.dbConn.filter((i) => {
             
-        //     return i.id !== id;
-        // })
-        // res.send(`Menssagem: ${id} apagado com sucesso`)
+            return i.id !== id;
+        })
+        res.send(`Menssagem: ${id} apagado com sucesso`)
     }
 
     update = async (req, res) => {
