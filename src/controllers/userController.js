@@ -147,7 +147,7 @@ class userController {
             id: id,
             nome: content.nome,
             email: content.email,
-            senha: content.senha,
+            senha: sha256(content.senha),
             CPF: content.CPF,
             id_adress: content.id_adress
         }
