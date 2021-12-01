@@ -61,9 +61,9 @@ class userController {
     }
 
     save = async (req, res) => {
-        const {nome, email, senha, CPF, id_endereco} = req.body;
+        const {nome, email, senha, CPF, id_adress} = req.body;
 
-        const user = new UserModel(nome, email, senha, CPF, id_endereco)
+        const user = new UserModel(nome, email, senha, CPF, id_adress)
 
         try {
             
@@ -111,45 +111,52 @@ class userController {
         const id = req.params.id;
         const content = req.body;
 
-        try {
+        // try {
             
-            let userUpIndex = await this.dbConn.getUserById(id)[0]
+        //     let userUpIndex = await this.dbConn.getUserById(id)[0]
 
-            if(content.nome == null ) {
-                content.nome = userUpIndex.nome
-            }
-            if(content.email == null ) {
-                content.email = userUpIndex.email
-            }
-            if(content.senha == null ) {
-                content.senha= userUpIndex.senha
-            }
-            if(content.CPF == null ) {
-                content.CPF = userUpIndex.CPF
-            }
-            if(content.id_endereco == null ) {
-                content.id_endereco = userUpIndex.id_endereco
-            }
+        //     if(content.nome == null ) {
+        //         content.nome = userUpIndex.nome
+        //     }
+        //     if(content.email == null ) {
+        //         content.email = userUpIndex.email
+        //     }
+        //     if(content.senha == null ) {
+        //         content.senha= userUpIndex.senha
+        //     }
+        //     if(content.CPF == null ) {
+        //         content.CPF = userUpIndex.CPF
+        //     }
+        //     if(content.id_endereco == null ) {
+        //         content.id_endereco = userUpIndex.id_endereco
+        //     }
 
-            await this.dbConn.userPayment(id, content)
+        //     await this.dbConn.userPayment(id, content)
 
-            res.status(200).send({ mensagem: "Usuário atualizado com sucesso!"})
+        //     res.status(200).send({ mensagem: "Usuário atualizado com sucesso!"})
 
-        } catch (error) {
+        // } catch (error) {
 
-            res.status(500).json(error)
+        //     res.status(500).json(error)
 
+        // }
+
+       
+        let userObj = {
+            id: id,
+            nome: content.nome,
+            email: content.email,
+            senha: content.senha,
+            CPF: content.CPF,
+            id_adress: content.id_adress
         }
 
-        // const id = req.params.id
-        // const content = req.body
-
-        // for (let i =0; i < this.dbConn.length; i++) {
-        //     if(this.dbConn[i].id = id) {
-        //         this.dbConn[i] = content
-        //     }
-        // }
-        // res.send(`Task: ${id} modificado com sucesso`)
+        for (let i =0; i < this.dbConn.length; i++) {
+            if(this.dbConn[i].id === id) {
+                this.dbConn[i] = userObj;
+            }
+        }
+        res.send(`Task: ${id} modificado com sucesso`)
     }
 }
 
