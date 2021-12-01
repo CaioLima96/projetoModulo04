@@ -110,51 +110,58 @@ class RoomController {
         const id = req.params.id;
         const content = req.body;
 
-        try {
+        // try {
             
-            let roomUpIndex = await this.dbConn.getRoomById(id)[0]
+        //     let roomUpIndex = await this.dbConn.getRoomById(id)[0]
 
-            // if(content.id == null ) {
-            //     content.id = eventUpIndex.id
-            // }
-            if(content.tipo_de_quarto == null ) {
-                content.tipo_de_quarto = roomUpIndex.tipo_de_quarto
-            }
-            if(content.nome_ou_numero == null ) {
-                content.nome_ou_numero = roomUpIndex.numero
-            }
-            if(content.qtd_max_pessoas == null ) {
-                content.qtd_max_pessoas = roomUpIndex.qtd_max_pessoas
-            }
-            if(content.andar == null ) {
-                content.andar = roomUpIndex.andar
-            }
-            if(content.status == null ) {
-                content.status = roomUpIndex.status
-            }
-            if(content.valor_quarto == null ) {
-                content.valor_quarto = roomUpIndex.valor_quarto
-            }
+        //     // if(content.id == null ) {
+        //     //     content.id = eventUpIndex.id
+        //     // }
+        //     if(content.tipo_de_quarto == null ) {
+        //         content.tipo_de_quarto = roomUpIndex.tipo_de_quarto
+        //     }
+        //     if(content.numero == null ) {
+        //         content.numero = roomUpIndex.numero
+        //     }
+        //     if(content.qtd_max_pessoas == null ) {
+        //         content.qtd_max_pessoas = roomUpIndex.qtd_max_pessoas
+        //     }
+        //     if(content.andar == null ) {
+        //         content.andar = roomUpIndex.andar
+        //     }
+        //     if(content.status == null ) {
+        //         content.status = roomUpIndex.status
+        //     }
+        //     if(content.valor_quarto == null ) {
+        //         content.valor_quarto = roomUpIndex.valor_quarto
+        //     }
 
-            await this.dbConn.updateRoom(id, content)
+        //     await this.dbConn.updateRoom(id, content)
 
-            res.status(200).send({ mensagem: "Quarto atualizado com sucesso"})
+        //     res.status(200).send({ mensagem: "Quarto atualizado com sucesso"})
 
-        } catch (error) {
+        // } catch (error) {
 
-            res.status(500).json(error)
+        //     res.status(500).json(error)
 
+        // }
+
+        let roomObj = {
+            id: id,
+            tipo_de_quarto: content.tipo_de_quarto,
+            numero: content.numero,
+            qtd_max_pessoas: content.qtd_max_pessoas,
+            andar: content.andar,
+            status: content.status,
+            valor_quarto: content.valor_quarto
         }
 
-        // const id = req.params.id
-        // const content = req.body
-
-        // for (let i =0; i < this.dbConn.length; i++) {
-        //     if(this.dbConn[i].id = id) {
-        //         this.dbConn[i] = content
-        //     }
-        // }
-        // res.send(`Task: ${id} modificado com sucesso`)
+        for (let i =0; i < this.dbConn.length; i++) {
+            if(this.dbConn[i].id === id) {
+                this.dbConn[i] = roomObj
+            }
+        }
+        res.send(`Room: ${id} modificado com sucesso`)
     }
 }
 
