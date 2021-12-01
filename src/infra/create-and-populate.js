@@ -180,6 +180,46 @@ function populaTabelaExperience() {
 
 
 
+//===== USER EVENT
+
+const USER_EVENT_SCHEMA = ``
+
+const  ADD_USER_EVENT_DATA = ``
+
+function criaTabelaBooking() {
+    db.run(USER_EVENT_SCHEMA, (error)=> {
+       if (error) console.log("Erro ao criar tabela de user_event");
+    });
+}
+
+function populaTabelaBooking() {
+    db.run(ADD_USER_EVENT_DATA, (error)=> {
+       if (error) console.log("Erro ao popular tabela de user_event");
+    });
+}
+
+
+
+//===== USER EXPERIENCE
+
+const USER_EXPERIENCE_SCHEMA = ``
+
+const  ADD_USER_EXPERIENCE_DATA = ``
+
+function criaTabelaBooking() {
+    db.run(USER_EXPERIENCE_SCHEMA, (error)=> {
+       if (error) console.log("Erro ao criar tabela de user_experience");
+    });
+}
+
+function populaTabelaBooking() {
+    db.run(ADD_USER_EXPERIENCE_DATA, (error)=> {
+       if (error) console.log("Erro ao popular tabela de user_experience");
+    });
+}
+
+
+
 //===== BOOKING
 
 const BOOKING_SCHEMA = ``
