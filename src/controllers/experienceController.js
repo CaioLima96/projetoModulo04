@@ -172,7 +172,7 @@ class ExperienceController {
             }
         }
 
-        res.send(`Task: ${id} modificado com sucesso`)
+        res.send(`Experience: ${id} modificado com sucesso`)
     }
 }
 
