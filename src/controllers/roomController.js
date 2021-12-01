@@ -10,36 +10,36 @@ class RoomController {
 
     show = async (req, res) => {
 
-        try {
+        // try {
 
-            let roomShow = await this.dbConn.getRoomById(req.params.id)
+        //     let roomShow = await this.dbConn.getRoomById(req.params.id)
 
-            if(roomShow.length == 0) {
+        //     if(roomShow.length == 0) {
                 
-                console.log("Quarto não existe.")
-                res.status(500).send({mensagem: "Quarto não existe."})
+        //         console.log("Quarto não existe.")
+        //         res.status(500).send({mensagem: "Quarto não existe."})
 
-            } else {
+        //     } else {
 
-                console.log(roomShow,`\nRota GET "unica" feita com sucesso`)
+        //         console.log(roomShow,`\nRota GET "unica" feita com sucesso`)
 
-                res.status(200).send({data: roomShow, menssagem: "Quarto retornado com sucesso"})
+        //         res.status(200).send({data: roomShow, menssagem: "Quarto retornado com sucesso"})
                 
-            }
-
-        } catch (error) {
-
-            console.log('Erro da requisição: ' + error)
-            res.status(500).json(error)
-
-        }
-
-        // this.dbConn.forEach((event) => {
-        //     if(event.id == req.params.id) {
-        //         console.log(event,`\nRota GET "unica" feita com sucesso`)
-        //         res.send(event)
         //     }
-        // })
+
+        // } catch (error) {
+
+        //     console.log('Erro da requisição: ' + error)
+        //     res.status(500).json(error)
+
+        // }
+
+        this.dbConn.forEach((event) => {
+            if(event.id == req.params.id) {
+                console.log(event,`\nRota GET "unica" feita com sucesso`)
+                res.send(event)
+            }
+        })
     }
 
     index = async (req, res) => {

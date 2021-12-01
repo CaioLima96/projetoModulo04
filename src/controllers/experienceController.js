@@ -108,58 +108,71 @@ class ExperienceController {
         const id = req.params.id;
         const content = req.body;
         
-        try {
+        // try {
             
-            let expUpIndex = await this.dbConn.getExperienceById(id)[0]
+        //     let expUpIndex = await this.dbConn.getExperienceById(id)[0]
 
-            if(content.nome == null){
-                content.nome = expUpIndex.nome
-            }
-            if(content.valor_exp == null) {
-                content.valor_exp = expUpIndex.valor_exp
-            }
-            if(content.id_booking == null) {
-                content.id_booking = expUpIndex.id_booking
-            }
-            if(content.horario == null) {
-                content.horario = expUpIndex.horario
-            }
-            if(content.duracao == null) {
-                content.duracao = expUpIndex.duracao
-            }
-            if(content.local == null) {
-                content.local = expUpIndex.local
-            }
-            if(content.dia_semana == null) {
-                content.dia_semana = expUpIndex.dia_semana
-            }
-            if(content.qtd_pessoas == null) {
-                content.qtd_pessoas = expUpIndex.qtd_pessoas
-            }
-            if(content.descricao == null) {
-                content.descricao = expUpIndex.descricao
-            }
+        //     if(content.nome == null){
+        //         content.nome = expUpIndex.nome
+        //     }
+        //     if(content.valor_exp == null) {
+        //         content.valor_exp = expUpIndex.valor_exp
+        //     }
+        //     if(content.id_booking == null) {
+        //         content.id_booking = expUpIndex.id_booking
+        //     }
+        //     if(content.horario == null) {
+        //         content.horario = expUpIndex.horario
+        //     }
+        //     if(content.duracao == null) {
+        //         content.duracao = expUpIndex.duracao
+        //     }
+        //     if(content.local == null) {
+        //         content.local = expUpIndex.local
+        //     }
+        //     if(content.dia_semana == null) {
+        //         content.dia_semana = expUpIndex.dia_semana
+        //     }
+        //     if(content.qtd_pessoas == null) {
+        //         content.qtd_pessoas = expUpIndex.qtd_pessoas
+        //     }
+        //     if(content.descricao == null) {
+        //         content.descricao = expUpIndex.descricao
+        //     }
 
-            await this.dbConn.updateExperience(id, content)
+        //     await this.dbConn.updateExperience(id, content)
 
-            res.status(200).send({ mensagem: "Experiência atualizada com sucesso"})
+        //     res.status(200).send({ mensagem: "Experiência atualizada com sucesso"})
 
-        } catch (error) {
+        // } catch (error) {
             
-            res.status(500).json(error)
+        //     res.status(500).json(error)
 
-        }
+        // }
 
         // const id = req.params.id
         // const content = req.body
 
-        // for (let i =0; i < this.dbConn.length; i++) {
-        //     if(this.dbConn[i].id = id) {
-        //         this.dbConn[i] = content
-        //     }
-        // }
+        let experienceObj = {
+            id: id,
+            nome: content.nome,
+            valor_exp: content.valor_exp,
+            id_booking: content.id_booking,
+            horario: content.horario,
+            duracao: content.duracao,
+            local: content.local,
+            dia_semana: content.dia_semana,
+            qtd_pessoas: content.qtd_pessoas,
+            descricao: content.descricao
+        }
 
-        // res.send(`Task: ${id} modificado com sucesso`)
+        for (let i =0; i < this.dbConn.length; i++) {
+            if(this.dbConn[i].id === id) {
+                this.dbConn[i] = experienceObj
+            }
+        }
+
+        res.send(`Task: ${id} modificado com sucesso`)
     }
 }
 
