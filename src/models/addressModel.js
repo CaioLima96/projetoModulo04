@@ -1,8 +1,9 @@
 const { v4: uuid } = require("uuid");
 
 class AddressModel {
-    constructor(cep, logradouro, numero, complemento, bairro, cidade, estado, pais) {
+    constructor( id, cep, logradouro, numero, complemento, bairro, cidade, estado, pais) {
         this.id = uuid(),
+        this.id = id,
         this.cep = cep,
         this.logradouro = logradouro,
         this.numero = numero,
@@ -10,8 +11,7 @@ class AddressModel {
         this.bairro = bairro,
         this.cidade = cidade,
         this.estado = estado,
-        this.pais = pais,
-        this.id_user = id_user
+        this.pais = pais
     }
 }
 
