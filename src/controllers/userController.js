@@ -156,7 +156,7 @@ class userController {
                 this.dbConn[i] = userObj;
             }
         }
-        res.send(`Task: ${id} modificado com sucesso`)
+        res.send(`User: ${id} modificado com sucesso`)
     }
 }
 
