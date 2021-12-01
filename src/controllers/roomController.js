@@ -85,25 +85,25 @@ class RoomController {
 
     remove = async (req, res) => {
 
-        try {
+        // try {
             
-            await this.dbConn.deleteRoom(req.params.id)
+        //     await this.dbConn.deleteRoom(req.params.id)
 
-            res.status(200).send({ mensagem: "Quarto apagado com sucesso"})
+        //     res.status(200).send({ mensagem: "Quarto apagado com sucesso"})
 
-        } catch (error) {
+        // } catch (error) {
 
-            console.log('Erro da requisição: ' + error)
-            res.status(500).json(error)
+        //     console.log('Erro da requisição: ' + error)
+        //     res.status(500).json(error)
 
-        }
+        // }
         
-        // const id = req.params.id
-        // this.dbConn = this.dbConn.filter((i) => {
+        const id = req.params.id
+        this.dbConn = this.dbConn.filter((i) => {
             
-        //     return i.id !== id;
-        // })
-        // res.send(`Menssagem: ${id} apagado com sucesso`)
+            return i.id !== id;
+        })
+        res.send(`Menssagem: ${id} apagado com sucesso`)
     }
 
     update = async (req, res) => {
