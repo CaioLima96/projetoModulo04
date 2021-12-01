@@ -61,9 +61,9 @@ class AddressController {
     }
 
     save = async (req, res) => {
-        const {cep, logradouro, numero, complemento, bairro, cidade, estado, pais } = req.body;
+        const {id, cep, logradouro, numero, complemento, bairro, cidade, estado, pais } = req.body;
 
-        const address = new AddressModel(cep, logradouro, numero, complemento, bairro, cidade, estado, pais)
+        const address = new AddressModel(id, cep, logradouro, numero, complemento, bairro, cidade, estado, pais)
 
         try {
             

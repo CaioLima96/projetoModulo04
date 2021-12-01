@@ -44,6 +44,7 @@ class ExperienceDao {
         return new Promise((resolve, reject) => {
             this.dbConn.run(
                 `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                address.id,
                 address.cep,
                 address.logradouro,
                 address.numero,
@@ -82,7 +83,8 @@ class ExperienceDao {
     updateAddress = (id, address) => {
         return new Promise((resolve, reject) => {
             this.dbConn.run(
-                `UPDATE ${TABLE} SET cep = ?, logradouro = ?, numero = ?, complemento = ?, bairro =?, cidade = ?, estado = ?, pais = ? WHERE id = ?`, 
+                `UPDATE ${TABLE} SET id = ?. cep = ?, logradouro = ?, numero = ?, complemento = ?, bairro =?, cidade = ?, estado = ?, pais = ? WHERE id = ?`, 
+                address.id,
                 address.cep,
                 address.logradouro,
                 address.numero,
