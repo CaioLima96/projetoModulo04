@@ -1,5 +1,5 @@
 const bd = require('../infra/sqlite-db');
-const { BOOKINGS_TABLE: TABLE} = require('../utils/appConfig')
+const { BOOKING_TABLE: TABLE} = require('../utils/appConfig')
 
 
 class BookingDao {
