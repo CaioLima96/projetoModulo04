@@ -1,36 +1,35 @@
-const EVENT_SCHEMA = `
-CREATE TABLE IF NOT EXISTS "events" (
+const STAFF_SCHEMA = `
+CREATE TABLE IF NOT EXISTS "staff" (
     "id" CHAR(36) PRIMARY KEY,
     "nome" varchar(100),
-    "data_inicio" DATETIME,
-    "data_fim" DATETIME,
-    "qtd_pessoas" INTEGER(5) NOT NULL,
-    "valor_event" DECIMAL(6,2) NOT NULL,
-    "faixa_etaria" varchar(2),
-    "descricao" varchar(250),
-    "id_booking" CHAR(36),
-    "id_user" CHAR(36),
-    "local_event" varchar(50),
-    "duracao" varchar(15),
-    FOREIGN KEY(id_booking) REFERENCES booking(id),
-    FOREIGN KEY(id_user) REFERENCES user(id)
+    "cargo" varchar(25),
+    FOREIGN KEY() REFERENCES (),
+    FOREIGN KEY() REFERENCES ()
   );
 `
 
-const ADD_EVENT_DATA = `
-INSERT INTO events (id, nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, id_booking, id_user, local_event)
+let id_staff1 = uuid();
+let id_staff2 = uuid();
+let id_staff3 = uuid();
+let id_staff4 = uuid();
+
+const ADD_STAFF_DATA = `
+INSERT INTO staff (id, nome, cargo)
 VALUES 
-    (' ', 'Ano Novo', '2021-12-31 20:00:00', )
+    ( '${id_staff1}', 'Fábio Almeida', 'Recepcionista')
+    ( '${id_staff2}', 'David Fernando', 'Camareiro')
+    ( '${id_staff3}', 'Lara Silva', 'Gerente')
+    ( '${id_staff4}', 'Carlos José', 'Recepcionista')
 `
 
-function criaTabelaEvent() {
-    db.run(EVENT_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de eventos");
+function criaTabelaStaff() {
+    db.run(STAFF_SCHEMA, (error)=> {
+       if (error) console.log("Erro ao criar tabela de funcionarios");
     });
 }
 
-function populaTabelaEvent() {
-    db.run(ADD_EVENT_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de eventos");
+function populaTabelaStaff() {
+    db.run(ADD_STAFF_DATA, (error)=> {
+       if (error) console.log("Erro ao popular tabela de funcionarios");
     });
 }
