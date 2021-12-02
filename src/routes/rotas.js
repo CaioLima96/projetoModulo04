@@ -1,25 +1,26 @@
 const express = require("express");
 const router = express.Router();
+
 const experienceRouter = require("./experienceRouter");
-
-
-//middleware
-router.use(express.json());
-
-router.use((req, res) => {
-    //*res.send('testando');  VAI PRO CONTROLLERS
-})
+const roomRouter = require("./roomRouter");
+const paymentRouter = require("./paymentRouter");
+const eventRouter = require("./eventRouter");
+const userRouter = require("./userRouter");
+const staffRouter = require("./staffRouter");
+const bookingRouter = require("./bookingRouter");
+const addressRouter = require("./addressRouter");
 
 
 
 // ROTAS
-router.use("/user", userRouter);
-router.use("/booking", bookingRouter);
-router.use("/payment", paymentRouter);
-router.use("/staff", staffRouter);
-router.use("/room", roomRouter);
-router.use("/event", eventRouter);
 router.use("/experience", experienceRouter);
+router.use("/room", roomRouter);
+router.use("/payment", paymentRouter);
+router.use("/event", eventRouter);
+router.use("/user", userRouter);
+router.use("/staff", staffRouter);
+router.use("/booking", bookingRouter);
+router.use("/address", addressRouter);
 
 
 

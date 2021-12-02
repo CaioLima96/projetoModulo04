@@ -1,19 +1,19 @@
 const bd = require('../infra/sqlite-db');
-const { EXPERIENCES_TABLE: TABLE} = require('../utils/appConfig')
+const { ROOMS_TABLE: TABLE} = require('../utils/appConfig')
 
 
-class ExperienceDao {
+class StaffDao {
     constructor(dbConn) {
         this.dbConn = dbConn
     }
 
-    getExperienceById = (id) => {
+    getStaffById = (id) => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE} WHERE id like ?`,
                 id,
                 (error, results) => {
-                    console.log("Usuário unico retornado com sucesso")
+                    console.log("Usuário único retornado com sucesso")
                     if(error) {
                         reject("Error: " + error)
                     } else {
@@ -24,12 +24,12 @@ class ExperienceDao {
         })
     }
 
-    getAllExperiences = () => {
+    getAllStaffs = () => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE}`,
                 (error, results) => {
-                    console.log("Todos os Usuários retornados com sucesso")
+                    console.log("Todos os usuários retornados com sucesso")
                     if(error) {
                         reject("Error: " + error)
                     } else {
@@ -40,19 +40,14 @@ class ExperienceDao {
         })
     }
 
-    saveExperience = (exp) => {
+    saveUser = (staff) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            exp.id,
-            exp.nome,
-            exp.valor_exp,
-            exp.horario,
-            exp.duracao,
-            exp.local_experience,
-            exp.dia_semana,
-            exp.qtd_pessoas,
-            exp.descricao,
+            `INSERT INTO ${TABLE} VALUES (?, ?, ?)`,
+            staff.id,
+            staff.nome,
+            staff.cargo,
+
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -65,7 +60,7 @@ class ExperienceDao {
         });
     }
 
-    deleteExperience = (id) => {
+    deleteStaff = (id) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, id, 
           (error) => {
@@ -78,19 +73,14 @@ class ExperienceDao {
           })
         })
     }
-    
-    updateExperience = (id, exp) => {
+
+    updateExperience = (id, staff) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `UPDATE ${TABLE} SET nome = ?, valor_exp = ?, horario = ?, duracao = ?, local = ?, dia_semana = ?, qtd_pessoas = ?, descricao = ? WHERE id = ?`, 
-            exp.nome,
-            exp.valor_exp,
-            exp.horario,
-            exp.duracao,
-            exp.local_experience,
-            exp.dia_semana,
-            exp.qtd_pessoas,
-            exp.descricao,
+            `UPDATE ${TABLE} SET nome = ?, staff = ?, cargo = ?, WHERE id = ?`, 
+            staff.nome,
+            staff.staff,
+            staff.cargo,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
@@ -105,5 +95,4 @@ class ExperienceDao {
     }
 }
 
-
-module.exports = new ExperienceDao(bd)
+module.exports = new StaffDao(bd)

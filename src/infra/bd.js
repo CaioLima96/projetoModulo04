@@ -1,4 +1,10 @@
 module.exports = {
     usersDB: [],
-    experienceDB: []
+    bookingDB: [],
+    paymentDB: [],
+    staffDB: [],
+    roomDB: [],
+    eventDB: [],
+    experienceDB: [],
+    addressDB: []
 }

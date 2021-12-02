@@ -1,6 +1,6 @@
 const express = require("express");
 
-const ExperienceController = require("../controllers/experienceController/experienceController");
+const ExperienceController = require("../controllers/experienceController");
 
 const router = express.Router();
 

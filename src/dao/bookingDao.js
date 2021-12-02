@@ -1,19 +1,19 @@
 const bd = require('../infra/sqlite-db');
-const { EXPERIENCES_TABLE: TABLE} = require('../utils/appConfig')
+const { BOOKING_TABLE: TABLE} = require('../utils/appConfig')
 
 
-class ExperienceDao {
+class BookingDao {
     constructor(dbConn) {
         this.dbConn = dbConn
     }
 
-    getExperienceById = (id) => {
+    getBookingById = (id) => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE} WHERE id like ?`,
                 id,
                 (error, results) => {
-                    console.log("Usuário unico retornado com sucesso")
+                    console.log("Reserva unica retornada com sucesso")
                     if(error) {
                         reject("Error: " + error)
                     } else {
@@ -24,12 +24,12 @@ class ExperienceDao {
         })
     }
 
-    getAllExperiences = () => {
+    getAllBookings = () => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE}`,
                 (error, results) => {
-                    console.log("Todos os Usuários retornados com sucesso")
+                    console.log("Todos as reservas retornadas com sucesso")
                     if(error) {
                         reject("Error: " + error)
                     } else {
@@ -40,19 +40,19 @@ class ExperienceDao {
         })
     }
 
-    saveExperience = (exp) => {
+    saveBooking = (book) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
             `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            exp.id,
-            exp.nome,
-            exp.valor_exp,
-            exp.horario,
-            exp.duracao,
-            exp.local_experience,
-            exp.dia_semana,
-            exp.qtd_pessoas,
-            exp.descricao,
+            book.id,
+            book.id_user,
+            book.id_room,
+            book.qtd_pessoas,
+            book.data_entrada,
+            book.data_saida,
+            book.user_event_id,
+            book.user_experience_id,
+            book.valor_total,
             (error) => {
                 console.log("Rota post feita com sucesso")
               if (error) {
@@ -65,7 +65,7 @@ class ExperienceDao {
         });
     }
 
-    deleteExperience = (id) => {
+    deleteBooking = (id) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, id, 
           (error) => {
@@ -79,18 +79,18 @@ class ExperienceDao {
         })
     }
     
-    updateExperience = (id, exp) => {
+    updateBooking = (id, book) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `UPDATE ${TABLE} SET nome = ?, valor_exp = ?, horario = ?, duracao = ?, local = ?, dia_semana = ?, qtd_pessoas = ?, descricao = ? WHERE id = ?`, 
-            exp.nome,
-            exp.valor_exp,
-            exp.horario,
-            exp.duracao,
-            exp.local_experience,
-            exp.dia_semana,
-            exp.qtd_pessoas,
-            exp.descricao,
+            `UPDATE ${TABLE} SET id_user = ?, id_room = ?, qtd_pessoas = ?, data_entrada = ?, data_saida =?, user_event_id = ?, user_experience_id = ?, valor_total = ? WHERE id = ?`, 
+            book.id_user,
+            book.id_room,
+            book.qtd_pessoas,
+            book.data_entrada,
+            book.data_saida,
+            book.user_event_id,
+            book.user_experience_id,
+            book.valor_total,
             id,
             (error) => {
                 console.log("Rota update feita com sucesso")
@@ -106,4 +106,4 @@ class ExperienceDao {
 }
 
 
-module.exports = new ExperienceDao(bd)
+module.exports = new BookingDao(bd)
