@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS "users" (
     "nome" varchar(100),
     "email" VARCHAR(80),
     "senha" CHAR(50),
-    "CPF" INTEGER(11) NOT NULL,
+    "CPF" INTEGER(11),
     "id_address" CHAR(36),
     FOREIGN KEY(id_address) REFERENCES address(id)
   );
@@ -34,9 +34,9 @@ let user_senha_3 = sha256((Math.random() + 1).toString(36).substring(2));
 const ADD_USERS_DATA = `
 INSERT INTO users (id, nome, email, senha, CPF, id_address)
 VALUES 
-    ('${user_id_1}', 'Maria Silva', 'mariasilva@gmail.com', '${user_senha_1}', '48018705038','${id_address1}'),
-    ('${user_id_2}', 'Lívia Caroline Raquel Sales', 'liviacarolineraquelsales_@metalplasma.com.br', '${user_senha_2}', '02214968822','${id_address2}'),
-    ('${user_id_3}', 'Julio Edson Fernando Nascimento', 'julioedsonfernandonascimento@sp.gov.br', '${user_senha_3}', '10622466917','${id_address3}')
+    ('${user_id_1}', 'Maria Silva', 'mariasilva@gmail.com', '${user_senha_1}', 12345678911,'${id_address1}'),
+    ('${user_id_2}', 'Lívia Caroline Raquel Sales', 'liviacarolineraquelsales_@metalplasma.com.br', '${user_senha_2}', 12312312311,'${id_address2}'),
+    ('${user_id_3}', 'Julio Edson Fernando Nascimento', 'julioedsonfernandonascimento@sp.gov.br', '${user_senha_3}', 12332112311,'${id_address3}')
 `
 
 function criaTabelaUser() {
@@ -196,7 +196,7 @@ const ADD_EVENT_DATA = `
 
         ('${event_id_2}', 'Festa tradicional da cidade', '2022-02-13 13:00:00', '2022-02-16 22:00:00', 180, 60.00, 'Livre', 'Venha comemorar o aniversário da nossa cidade com comidas típicas e muito mais.', '3 dias', 'Salão'),
 
-        ('${event_id_3}', 'Eventos corporativos', '2022-03-14 15:00:00', 2022-03-18 20:00:00', 400, 200.00, '18+', 'Atividades como convenções, treinamentos, reuniões e kick-off.', '4 dias', 'Salão'),
+        ('${event_id_3}', 'Eventos corporativos', '2022-03-14 15:00:00', '2022-03-18 20:00:00', 400, 200.00, '18+', 'Atividades como convenções, treinamentos, reuniões e kick-off.', '4 dias', 'Salão'),
 
         ('${event_id_4}', 'Cursos e workshops', '2022-03-20 10:00:00', '2022-04-05 16:00:00', 400, 150.00, '14+', 'Dursos e workshops de gastronomia com chefs renomados', '17 dias', 'Salão')
 `
@@ -224,7 +224,7 @@ const EXPERIENCES_SCHEMA = `
         "valor_exp" DECIMAL(6,2),
         "horario" DATETIME,
         "duracao" VARCHAR(15),
-        "local_experience" VARCHAR(15),
+        "local_experience" VARCHAR(25),
         "dia_semana" VARCHAR(50),
         "qtd_pessoas" INTEGER(5),
         "descricao" VARCHAR(500)
@@ -242,7 +242,7 @@ const ADD_EXPERIENCES_DATA = `
 
         ('${exp_id_2}', 'Jantar à luz de vela', 2500.00, '20:00:00', '1:30:00', 'Jardim do hotel', 'sexta, sabado, domingo', 02, 'Não há nada melhor do que celebrar um sentimento tão lindo como o amor! O Jantar à luz de velas é servido em espaço exclusivo no jardim do hotel – um ambiente com flores, árvores e parreiras!'),
 
-        ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.')
+        ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'Jardim','segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.')
 `
 
 function criaTabelaExperience() {
@@ -273,7 +273,8 @@ const USER_EVENT_SCHEMA = `
 const  ADD_USER_EVENT_DATA = `
     INSERT INTO user_events (user_id, event_id)
     VALUES
-        ()
+        ('${user_id_1}','${event_id_1}'),
+        ('${user_id_2}','${event_id_2}')
 
 `
 
@@ -305,7 +306,8 @@ const USER_EXPERIENCE_SCHEMA =  `
 const  ADD_USER_EXPERIENCE_DATA = `
     INSERT INTO user_experiences (user_id, experience_id)
     VALUES
-        ()
+        ('${user_id_1}','${exp_id_1}'),
+        ('${user_id_2}','${exp_id_2}')
 `
 
 function criaTabelaUserExperience() {
@@ -324,21 +326,45 @@ function populaTabelaUserExperience() {
 
 //===== BOOKING
 
-// const BOOKING_SCHEMA = ``
+const BOOKING_SCHEMA =  `
+CREATE TABLE IF NOT EXISTS "booking" (
+    "id" CHAR(36),
+    "id_user" CHAR(36),
+    "id_room" CHAR(36),
+    "qtd_pessoas" VARCHAR(2),
+    "data_entrada" DATETIME, 
+    "data_saida"  DATETIME,
+    "user_event_id" CHAR(36),
+    "user_experience_id" CHAR(36),
+    "valor_total" INTERGER,
+    FOREIGN KEY(id_user) REFERENCES users(id),
+    FOREIGN KEY(id_room) REFERENCES room(id),
+    FOREIGN KEY(user_event_id) REFERENCES users_event(id),
+    FOREIGN KEY(user_experience_id) REFERENCES users_experience(id)
+);
+`
 
-// const  ADD_BOOKING_DATA = ``
+let id_booking1 = uuid();
+let id_booking2 = uuid();
 
-// function criaTabelaBooking() {
-//     db.run(BOOKING_SCHEMA, (error)=> {
-//        if (error) console.log("Erro ao criar tabela de booking", error);
-//     });
-// }
 
-// function populaTabelaBooking() {
-//     db.run(ADD_BOOKING_DATA, (error)=> {
-//        if (error) console.log("Erro ao popular tabela de booking", error);
-//     });
-// }
+const  ADD_BOOKING_DATA = ` INSERT INTO booking (id, id_user, id_room, qtd_pessoas, data_entrada, data_saida, user_event_id, user_experience_id, valor_total)
+VALUES
+    ('${id_booking1}','${user_id_1}','${room_id_1}','2','2022-03-21 12:00:00','2022-03-21 14:00:00','${event_id_1}','${exp_id_1}',200),
+    ('${id_booking2}','${user_id_2}','${room_id_2}','4','2022-03-23 08:00:00','2022-03-23 10:00:00','${event_id_2}','${exp_id_1}',150)
+    `
+
+function criaTabelaBooking() {
+    db.run(BOOKING_SCHEMA, (error)=> {
+       if (error) console.log("Erro ao criar tabela de booking", error);
+    });
+}
+
+function populaTabelaBooking() {
+    db.run(ADD_BOOKING_DATA, (error)=> {
+       if (error) console.log("Erro ao popular tabela de booking", error);
+    });
+}
 
 
 
@@ -404,8 +430,8 @@ db.serialize( ()=> {
     criaTabelaUserExperience()
     populaTabelaUserExperience()
 
-    // criaTabelaBooking()
-    // populaTabelaBooking()
+    criaTabelaBooking()
+    populaTabelaBooking()
 
     criaTabelaPayment()
     populaTabelaPayment()
