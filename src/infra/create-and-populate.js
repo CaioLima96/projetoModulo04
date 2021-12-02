@@ -1,3 +1,5 @@
+//const valoresDao = require("../dao/valoresDao")
+
 /*
 Esse arquivo deve ser executado apenas uma vez para que a o banco seja criado e populado
 */
@@ -18,7 +20,7 @@ CREATE TABLE IF NOT EXISTS "users" (
     "nome" varchar(100),
     "email" VARCHAR(80),
     "senha" CHAR(50),
-    "CPF" INTEGER(11),
+    "cpf" INTEGER(11),
     "id_address" CHAR(36),
     FOREIGN KEY(id_address) REFERENCES address(id)
   );
@@ -32,7 +34,7 @@ let user_senha_2 = sha256((Math.random() + 1).toString(36).substring(2));
 let user_senha_3 = sha256((Math.random() + 1).toString(36).substring(2));
 
 const ADD_USERS_DATA = `
-INSERT INTO users (id, nome, email, senha, CPF, id_address)
+INSERT INTO users (id, nome, email, senha, cpf, id_address)
 VALUES 
     ('${user_id_1}', 'Maria Silva', 'mariasilva@gmail.com', '${user_senha_1}', 12345678911,'${id_address1}'),
     ('${user_id_2}', 'Lívia Caroline Raquel Sales', 'liviacarolineraquelsales_@metalplasma.com.br', '${user_senha_2}', 12312312311,'${id_address2}'),
@@ -326,6 +328,8 @@ function populaTabelaUserExperience() {
 
 //===== BOOKING
 
+//let bookTotal = valoresDao
+
 const BOOKING_SCHEMA =  `
 CREATE TABLE IF NOT EXISTS "booking" (
     "id" CHAR(36),
@@ -350,8 +354,8 @@ let id_booking2 = uuid();
 
 const  ADD_BOOKING_DATA = ` INSERT INTO booking (id, id_user, id_room, qtd_pessoas, data_entrada, data_saida, user_event_id, user_experience_id, valor_total)
 VALUES
-    ('${id_booking1}','${user_id_1}','${room_id_1}','2','2022-03-21 12:00:00','2022-03-21 14:00:00','${event_id_1}','${exp_id_1}',200),
-    ('${id_booking2}','${user_id_2}','${room_id_2}','4','2022-03-23 08:00:00','2022-03-23 10:00:00','${event_id_2}','${exp_id_1}',150)
+    ('${id_booking1}','${user_id_1}','${room_id_1}','2','2022-03-21 12:00:00','2022-03-21 14:00:00','${event_id_1}','${exp_id_1}', 150),
+    ('${id_booking2}','${user_id_2}','${room_id_2}','4','2022-03-23 08:00:00','2022-03-23 10:00:00','${event_id_2}','${exp_id_1}', 200)
     `
 
 function criaTabelaBooking() {

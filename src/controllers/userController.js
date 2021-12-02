@@ -62,9 +62,9 @@ class userController {
     }
 
     save = async (req, res) => {
-        const {nome, email, senha, CPF, id_adress} = req.body;
+        const {nome, email, senha, cpf, id_adress} = req.body;
 
-        const user = new UserModel(nome, email, senha, CPF, id_adress)
+        const user = new UserModel(nome, email, senha, cpf, id_adress)
 
         try {
             
@@ -123,10 +123,10 @@ class userController {
                 content.email = userUpIndex.email
             }
             if(content.senha == null ) {
-                content.senha= userUpIndex.senha
+                content.senha = userUpIndex.senha
             }
-            if(content.CPF == null ) {
-                content.CPF = userUpIndex.CPF
+            if(content.cpf == null ) {
+                content.cpf = userUpIndex.cpf
             }
             if(content.id_address == null ) {
                 content.id_address = userUpIndex.id_address

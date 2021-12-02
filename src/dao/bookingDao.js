@@ -4,7 +4,7 @@ const { BOOKING_TABLE: TABLE} = require('../utils/appConfig')
 
 class BookingDao {
     constructor(dbConn) {
-        this.dbConn = dbConn
+      this.dbConn = dbConn
     }
 
     getBookingById = (id) => {
