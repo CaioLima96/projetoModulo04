@@ -19,7 +19,6 @@ class BookingDao {
         book.data_saida,
         book.valor_total,
         (error) => {
-          console.log("Rota post feita com sucesso")
           if (error) {
             reject({ Msg: error.message });
           } else {
@@ -36,7 +35,6 @@ class BookingDao {
         `SELECT * FROM ${TABLE} WHERE id like ?`,
         id,
         (error, results) => {
-          console.log("Reserva unica retornada com sucesso")
           if (error) {
             reject({ Msg: error.message })
           } else {
@@ -52,7 +50,6 @@ class BookingDao {
       this.dbConn.all(
         `SELECT * FROM ${TABLE}`,
         (error, results) => {
-          console.log("Todos as reservas retornadas com sucesso")
           if (error) {
             reject({ Msg: error.message })
           } else {
@@ -75,7 +72,6 @@ class BookingDao {
         book.valor_total,
         id,
         (error) => {
-          console.log("Rota update feita com sucesso")
           if (error) {
             reject({ Msg: error.message });
           } else {
@@ -90,7 +86,6 @@ class BookingDao {
     return new Promise((resolve, reject) => {
       this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, id,
         (error) => {
-          console.log("Rota delete feita com sucesso")
           if (error) {
             reject({ Msg: error.message });
           } else {

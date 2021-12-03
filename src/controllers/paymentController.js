@@ -40,7 +40,7 @@ class PaymentController {
 
             } else {
 
-                res.status(200).send({data: paymentShow, menssagem: "Pagamento encontrado!"})
+                res.status(200).send(paymentShow)
             }
 
         } catch (error) {
@@ -62,7 +62,7 @@ class PaymentController {
             
             let paymentIndex = await this.dbConn.getAllPayments()
             
-            res.status(200).send({data: paymentIndex, mensagem: "Pagamentos retornados com sucesso"})
+            res.status(200).send(paymentIndex)
             
         } catch (error) {
 
