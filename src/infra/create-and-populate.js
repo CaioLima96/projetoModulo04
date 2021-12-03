@@ -338,24 +338,22 @@ CREATE TABLE IF NOT EXISTS "booking" (
     "qtd_pessoas" VARCHAR(2),
     "data_entrada" DATETIME, 
     "data_saida"  DATETIME,
-    "user_event_id" CHAR(36),
-    "user_experience_id" CHAR(36),
     "valor_total" INTERGER,
     FOREIGN KEY(id_user) REFERENCES users(id),
-    FOREIGN KEY(id_room) REFERENCES room(id),
-    FOREIGN KEY(user_event_id) REFERENCES users_event(id),
-    FOREIGN KEY(user_experience_id) REFERENCES users_experience(id)
+    FOREIGN KEY(id_room) REFERENCES room(id)
 );
 `
 
-let id_booking1 = uuid();
-let id_booking2 = uuid();
+let id_booking1 = uuid()
+let id_booking2 = uuid()
+let id_booking3 = uuid()
 
 
-const  ADD_BOOKING_DATA = ` INSERT INTO booking (id, id_user, id_room, qtd_pessoas, data_entrada, data_saida, user_event_id, user_experience_id, valor_total)
+const  ADD_BOOKING_DATA = ` INSERT INTO booking (id, id_user, id_room, qtd_pessoas, data_entrada, data_saida, valor_total)
 VALUES
-    ('${id_booking1}','${user_id_1}','${room_id_1}','2','2022-03-21 12:00:00','2022-03-21 14:00:00','${event_id_1}','${exp_id_1}', 150),
-    ('${id_booking2}','${user_id_2}','${room_id_2}','4','2022-03-23 08:00:00','2022-03-23 10:00:00','${event_id_2}','${exp_id_1}', 200)
+    ('${id_booking1}','${user_id_1}','${room_id_1}','2','2022-03-21 12:00:00','2022-03-21 14:00:00', 150),
+    ('${id_booking2}','${user_id_2}','${room_id_2}','4','2022-03-23 08:00:00','2022-03-23 10:00:00', 200),
+    ('${id_booking3}','${user_id_3}','${room_id_3}','4','2022-03-23 06:00:00','2023-05-23 10:00:00', 455.33)
     `
 
 function criaTabelaBooking() {
@@ -378,8 +376,10 @@ const PAYMENT_SCHEMA = `
 CREATE TABLE IF NOT EXISTS "payment" (
     "id" CHAR(36) PRIMARY KEY,
     "id_user" CHAR(36),
+    "id_booking" CHAR(36),
     "id_staff" CHAR(36),
     "valor_total" DECIMAL(6,2),
+    FOREIGN KEY(id_booking) REFERENCES booking(id),
     FOREIGN KEY(id_user) REFERENCES users(id),
     FOREIGN KEY(id_staff) REFERENCES staff(id)
   );
@@ -390,11 +390,11 @@ let id_pay2 = uuid();
 let id_pay3 = uuid();
 
 const ADD_PAYMENT_DATA = `
-INSERT INTO payment (id, id_user, id_staff, valor_total)
+INSERT INTO payment (id, id_user, id_booking, id_staff, valor_total)
 VALUES 
-    ( '${id_pay1}', '${user_id_1}', '${id_staff1}', 200),
-    ( '${id_pay2}', '${user_id_2}', '${id_staff2}', 60),
-    ( '${id_pay3}', '${user_id_3}', '${id_staff3}', 200)
+    ( '${id_pay1}', '${user_id_1}', '${id_booking1}', '${id_staff1}', 200),
+    ( '${id_pay2}', '${user_id_2}', '${id_booking2}', '${id_staff2}', 60),
+    ( '${id_pay3}', '${user_id_3}', '${id_booking3}', '${id_staff3}', 200)
 `
 
 function criaTabelaPayment() {
