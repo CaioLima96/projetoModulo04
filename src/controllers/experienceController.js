@@ -35,7 +35,7 @@ class ExperienceController {
 
             if(expShow.length == 0) {
 
-                res.status(500).send({mensagem: "Experiência não encontrada."})
+                res.status(500).send({mensagem: "Experiência não existe."})
 
             } else {
 

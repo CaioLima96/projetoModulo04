@@ -25,7 +25,7 @@ class ExperienceDao {
 					if (error) {
 						reject({Msg: error.message})
 					} else {
-						resolve(true);
+						resolve(true)
 					}
 				}
 			);

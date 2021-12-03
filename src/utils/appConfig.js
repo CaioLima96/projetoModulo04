@@ -5,7 +5,7 @@ module.exports = AppConfiguration = {
     BOOKING_TABLE: 'BOOKING',
     PAYMENT_TABLE: 'PAYMENT',
     STAFF_TABLE: 'STAFF',
-    ROOM_TABLE: 'ROOM',
+    ROOM_TABLE: 'ROOMS',
     EVENT_TABLE: 'EVENTS',
     EXPERIENCES_TABLE: 'EXPERIENCES',
 }
