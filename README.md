@@ -75,3 +75,10 @@ npm start
 - 
 ***
 ## 👨‍💻👩‍💻 Equipe de desenvolvedores:
+
+- <a href = "https://www.linkedin.com/in/adrielsaul/"> Adriel Saul </a>
+- <a href = "https://www.linkedin.com/in/caiovieiralima/"> Caio Vieira </a>
+- <a href = "https://www.linkedin.com/in/leoosilva/"> Leonardo Silva </a>
+- <a href = "https://www.linkedin.com/in/lorena-zanferrari-7a60a9126/"> Lorena Zanferrari </a>
+- <a href = "https://www.linkedin.com/in/marianamachado9/"> Mariana Machado </a>
+***
