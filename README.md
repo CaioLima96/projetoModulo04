@@ -1,1 +1,1 @@
-# Api - Hotel Resilia Palace
+# API - Hotel Resilia Palace
