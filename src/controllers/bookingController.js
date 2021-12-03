@@ -17,7 +17,7 @@ class BookingController {
 
             await this.dbConn.saveBooking(booking)
 
-            res.status(201).send({ menssage: "Reserva salva com sucesso" })
+            res.status(201).send({menssagem: "Reserva salva com sucesso" })
 
         } catch (error) {
 
@@ -37,11 +37,11 @@ class BookingController {
 
             if (bookShow.length == 0) {
 
-                res.status(500).send({ mensagem: "Reserva não existe." })
+                res.status(500).send({mensagem: "Reserva não existe."})
 
             } else {
 
-                res.status(200).send({ data: bookShow, menssagem: "Reserva retornada com sucesso" })
+                res.status(200).send(bookShow)
             }
         } catch (error) {
 
@@ -100,7 +100,7 @@ class BookingController {
             }
             await this.dbConn.updateBooking(id, content)
 
-            res.status(200).send({ mensagem: "Reserva atualizada com sucesso" })
+            res.status(200).send({mensagem: "Reserva atualizada com sucesso"})
 
         } catch (error) {
 

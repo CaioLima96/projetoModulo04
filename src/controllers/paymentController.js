@@ -17,7 +17,7 @@ class PaymentController {
             
             await this.dbConn.savePayment(payment)
 
-            res.status(201).send({menssage: "Pagamento efetuado com sucesso!"})
+            res.status(201).send({mensagem: "Pagamento efetuado com sucesso!"})
 
         } catch (error) {
             

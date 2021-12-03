@@ -42,7 +42,7 @@ class userController {
 
             } else {
 
-                res.status(200).send({ data: userShow })
+                res.status(200).send(userShow)
             }
 
         } catch (error) {
@@ -64,7 +64,7 @@ class userController {
 
             let userIndex = await this.dbConn.getAllUsers()
 
-            res.status(200).send({ data: userIndex })
+            res.status(200).send(userIndex)
 
         } catch (error) {
 
