@@ -332,7 +332,7 @@ function populaTabelaUserExperience() {
 
 const BOOKING_SCHEMA =  `
 CREATE TABLE IF NOT EXISTS "booking" (
-    "id" CHAR(36),
+    "id" CHAR(36) PRIMARY KEY,
     "id_user" CHAR(36),
     "id_room" CHAR(36),
     "qtd_pessoas" VARCHAR(2),
@@ -379,7 +379,7 @@ CREATE TABLE IF NOT EXISTS "payment" (
     "id" CHAR(36) PRIMARY KEY,
     "id_user" CHAR(36),
     "id_staff" CHAR(36),
-    "valor_total" DECIMAL(6,2) NOT NULL,
+    "valor_total" DECIMAL(6,2),
     FOREIGN KEY(id_user) REFERENCES users(id),
     FOREIGN KEY(id_staff) REFERENCES staff(id)
   );
