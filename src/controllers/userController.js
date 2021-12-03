@@ -143,14 +143,14 @@ class userController {
         }
 
        
-    //     let userObj = {
-    //         id: id,
-    //         nome: content.nome,
-    //         email: content.email,
-    //         senha: sha256(content.senha),
-    //         CPF: content.CPF,
-    //         id_adress: content.id_adress
-    //     }
+        // let userObj = {
+        //     id: id,
+        //     nome: content.nome,
+        //     email: content.email,
+        //     senha: sha256(content.senha),
+        //     CPF: content.CPF,
+        //     id_adress: content.id_adress
+        // }
 
     //     for (let i =0; i < this.dbConn.length; i++) {
     //         if(this.dbConn[i].id === id) {
