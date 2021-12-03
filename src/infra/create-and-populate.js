@@ -36,9 +36,9 @@ let user_senha_3 = sha256((Math.random() + 1).toString(36).substring(2));
 const ADD_USERS_DATA = `
 INSERT INTO users (id, nome, email, senha, cpf, id_address)
 VALUES 
-    ('${user_id_1}', 'Maria Silva', 'mariasilva@gmail.com', '${user_senha_1}', 12345678911,'${id_address1}'),
+    ('${user_id_1}', 'Maria Silva', 'mariasilva@gmail.com', '${user_senha_1}', 45678912378,'${id_address1}'),
     ('${user_id_2}', 'Lívia Caroline Raquel Sales', 'liviacarolineraquelsales_@metalplasma.com.br', '${user_senha_2}', 12312312311,'${id_address2}'),
-    ('${user_id_3}', 'Julio Edson Fernando Nascimento', 'julioedsonfernandonascimento@sp.gov.br', '${user_senha_3}', 12332112311,'${id_address3}')
+    ('${user_id_3}', 'Julio Edson Fernando Nascimento', 'julioedsonfernandonascimento@sp.gov.br', '${user_senha_3}', 98745612333,'${id_address3}')
 `
 
 function criaTabelaUser() {
@@ -195,11 +195,8 @@ const ADD_EVENT_DATA = `
     INSERT INTO events (id, nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event)
     VALUES 
         ('${event_id_1}', 'Colônia de férias', '2022-01-05 10:30:00', '2022-01-15 10:30:00', 280, 200.00, '12+', 'Atividades programadas, recreativas esportiva e, jantares em família.', '10 dias', 'Área externa'),
-
         ('${event_id_2}', 'Festa tradicional da cidade', '2022-02-13 13:00:00', '2022-02-16 22:00:00', 180, 60.00, 'Livre', 'Venha comemorar o aniversário da nossa cidade com comidas típicas e muito mais.', '3 dias', 'Salão'),
-
         ('${event_id_3}', 'Eventos corporativos', '2022-03-14 15:00:00', '2022-03-18 20:00:00', 400, 200.00, '18+', 'Atividades como convenções, treinamentos, reuniões e kick-off.', '4 dias', 'Salão'),
-
         ('${event_id_4}', 'Cursos e workshops', '2022-03-20 10:00:00', '2022-04-05 16:00:00', 400, 150.00, '14+', 'Dursos e workshops de gastronomia com chefs renomados', '17 dias', 'Salão')
 `
 
@@ -241,9 +238,7 @@ const ADD_EXPERIENCES_DATA = `
     INSERT INTO experiences (id, nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao)
     VALUES 
         ('${exp_id_1}', 'Massagem Facial', 300.00, '10:00:00', '1h20min', 'SPA', 'fds', 02, 'Deliciosa e completa massagem corporal relaxante. Acompanha alongamento na região do pescoço promovendo uma melhora nas tensões. Um momento de bem-estar dos pés à cabeça.'),
-
         ('${exp_id_2}', 'Jantar à luz de vela', 2500.00, '20:00:00', '1:30:00', 'Jardim do hotel', 'sexta, sabado, domingo', 02, 'Não há nada melhor do que celebrar um sentimento tão lindo como o amor! O Jantar à luz de velas é servido em espaço exclusivo no jardim do hotel – um ambiente com flores, árvores e parreiras!'),
-
         ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'Jardim','segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.')
 `
 
@@ -277,7 +272,6 @@ const  ADD_USER_EVENT_DATA = `
     VALUES
         ('${user_id_1}','${event_id_1}'),
         ('${user_id_2}','${event_id_2}')
-
 `
 
 function criaTabelaUserEvents() {
