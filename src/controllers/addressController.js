@@ -1,7 +1,6 @@
 const AddressModel = require('../models/addressModel')
 const AddressDao = require('../dao/addressDao')
-
-//const {addressDB} = require('../infra/bd')
+const {addressMemoryDB} = require('../infra/bd')
 
 class AddressController {
     constructor(dbConn) {
@@ -17,7 +16,7 @@ class AddressController {
             
             await this.dbConn.saveAddress(address)
 
-            res.status(201).send({menssage: "Endereço salvo com sucesso"})
+            res.status(201).send({mensagem: "Endereço salvo com sucesso"})
 
         } catch (error) {
             
@@ -112,7 +111,7 @@ class AddressController {
 
             await this.dbConn.updateAddress(id, content)
 
-            res.status(200).send({ mensagem: "Endereço atualizado com sucesso"})
+            res.status(200).send({mensagem: "Endereço atualizado com sucesso"})
 
         } catch (error) {
 
@@ -138,7 +137,7 @@ class AddressController {
             
             await this.dbConn.deleteAddress(req.params.id)
 
-            res.status(200).send({ mensagem: "Endereço apagado com sucesso"})
+            res.status(200).send({mensagem: "Endereço apagado com sucesso"})
 
         } catch (error) {
 
