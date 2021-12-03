@@ -70,7 +70,7 @@ npm start
 - 5: Staff
 - 6: Room
 - 7: Booking (Copiar, respectivamente, as chaves primarias users(ID) e rooms(ID) e colar nas chaves extrangeiras de booking (id_user) e (id_room)).
-- 8: Payment (Copiar, respectivamente, as chaves primarias booking(ID), users(ID) e staff(ID) e colar nas chaves extrangeiras de payment (id_booking), (id_user) e (id_staff)).
+- 8: Payment (Copiar, respectivamente, as chaves primarias users(ID), booking(ID), staff(ID) e colar nas chaves extrangeiras de payment (id_user), id_booking) e (id_staff)).
 ***
 ## 👨‍💻👩‍💻 Equipe de desenvolvedores:
 
