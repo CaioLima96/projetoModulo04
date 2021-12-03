@@ -33,7 +33,9 @@ router.get("/", (req, res) => {
     res.send(
     `
         <div style="padding-left: 0.938rem; padding-right: 0.938rem;">
+
             <h1>Bem vindo(a) à Api Hotel Resilia Palace!</h1>
+
             <ul>
 
                 <li  style="font-size: 1.25rem;">Para ver os usuários, basta por /user após o fim da url.</li>
@@ -42,8 +44,6 @@ router.get("/", (req, res) => {
                 <br>
                 <li  style="font-size: 1.25rem;">Para ver os quartos, basta por /room após o fim da url.</li>
                 <br>
-                <li  style="font-size: 1.25rem;">Para ver os pagamentos, basta por /payment após o fim da url</li>
-                <br>
                 <li  style="font-size: 1.25rem;">Para ver os eventos, basta por /event após o fim da url.</li>
                 <br>
                 <li  style="font-size: 1.25rem;">Para ver as experiências, basta por /experience após o fim da url.</li>
@@ -51,6 +51,8 @@ router.get("/", (req, res) => {
                 <li  style="font-size: 1.25rem;">Para ver os funcionários, basta por /staff após o fim da url.</li>
                 <br>
                 <li  style="font-size: 1.25rem;">Para ver as reservas, basta por /booking após o fim da url.</li>
+                <br>
+                <li  style="font-size: 1.25rem;">Para ver os pagamentos, basta por /payment após o fim da url</li>
 
             </ul>
 
@@ -61,6 +63,7 @@ router.get("/", (req, res) => {
             <br>
 
             <p>Api criada por: Grupo 1 - Resilia</p>
+            
         </div>
 
     `
