@@ -63,5 +63,15 @@ npm start
 
 ***
 ## 🛌 Considerações finais:
+- Na nossa API, para popular o banco, você deve seguir uma ordem de cadastro de entidades caso você use um programa externo para isso(Insomnia ou Postman), pois certas entidades precisam de chaves extrangeiras já prontas. A ordem é:
+- 1: Address
+- 2: User (Copiar a chave primaria de address(ID) e colar na chave extrangeira de users(id_address)).
+- 3: Event
+- 4: Experience
+- 5: Staff
+- 6: Room
+- 7: Booking (Copiar, respectivamente, as chaves primarias users(ID) e rooms(ID) e colar nas chaves extrangeiras de booking (id_user) e (id_room)).
+- 8: Payment (Copiar, respectivamente, as chaves primarias booking(ID), users(ID) e staff(ID) e colar nas chaves extrangeiras de payment (id_booking), (id_user) e (id_staff)).
 - 
-
+***
+## 👨‍💻👩‍💻 Equipe de desenvolvedores:
