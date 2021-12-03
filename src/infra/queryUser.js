@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS "users" (
     "senha" CHAR(50),
     "CPF" INTEGER(11) NOT NULL,
     "id_adress" CHAR(36),
-    FOREIGN KEY(id_endereco) REFERENCES adress(id)
+    FOREIGN KEY(id_adress) REFERENCES adress(id)
   );
 `
 

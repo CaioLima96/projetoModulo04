@@ -8,6 +8,6 @@ router.get("/:id", AddressController.show);
 router.get("/", AddressController.index);
 router.post("/", AddressController.save);
 router.put("/:id", AddressController.update);
-router.delete("/:id", AdressController.remove);
+router.delete("/:id", AddressController.remove);
 
 module.exports = router;

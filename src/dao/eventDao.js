@@ -1,43 +1,9 @@
 const bd = require('../infra/sqlite-db');
 const { EVENT_TABLE: TABLE} = require('../utils/appConfig')
 
-
 class EventDao {
     constructor(dbConn) {
         this.dbConn = dbConn
-    }
-
-    getEventById = (id) => {
-        return new Promise((resolve, reject) => {
-            this.dbConn.all(
-                `SELECT * FROM ${TABLE} WHERE id like ?`,
-                id,
-                (error, results) => {
-                    console.log("Usuário unico retornado com sucesso")
-                    if(error) {
-                        reject("Error: " + error)
-                    } else {
-                        resolve(results)
-                    }
-                }
-            )
-        })
-    }
-
-    getAllEvents = () => {
-        return new Promise((resolve, reject) => {
-            this.dbConn.all(
-                `SELECT * FROM ${TABLE}`,
-                (error, results) => {
-                    console.log("Todos os Usuários retornados com sucesso")
-                    if(error) {
-                        reject("Error: " + error)
-                    } else {
-                        resolve(results)
-                    }
-                }
-            )
-        })
     }
 
     saveEvent = (event) => {
@@ -55,9 +21,9 @@ class EventDao {
                 event.duracao,
                 event.local_event,
                 (error) => {
-                    console.log("Rota post feita com sucesso")
+
                     if (error) {
-                        reject("Error: " + error);
+                        reject({Msg: error.message});
                     } else {
                         resolve(true);
                     }
@@ -66,21 +32,39 @@ class EventDao {
         });
     }
 
-    deleteEvent = (id) => {
+    getEventById = (id) => {
         return new Promise((resolve, reject) => {
-          this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, 
-            id, 
-            (error) => {
-                console.log("Rota delete feita com sucesso")
-                if (error) {
-                reject(error);
-                } else {
-                resolve(true);
+            this.dbConn.all(
+                `SELECT * FROM ${TABLE} WHERE id like ?`,
+                id,
+                (error, results) => {
+                    
+                    if(error) {
+                        reject({Msg: error.message})
+                    } else {
+                        resolve(results)
+                    }
                 }
-          })
+            )
         })
     }
-    
+
+    getAllEvents = () => {
+        return new Promise((resolve, reject) => {
+            this.dbConn.all(
+                `SELECT * FROM ${TABLE}`,
+                (error, results) => {
+
+                    if(error) {
+                        reject({Msg: error.message})
+                    } else {
+                        resolve(results)
+                    }
+                }
+            )
+        })
+    }
+
     updateEvent = (id, event) => {
         return new Promise((resolve, reject) => {
             this.dbConn.run(
@@ -96,14 +80,29 @@ class EventDao {
                 event.local_event,
                 id,
                 (error) => {
-                    console.log("Rota update feita com sucesso")
+                    
                     if (error) {
-                        reject(error);
+                        reject({Msg: error.message});
                     } else {
                         resolve(true);
                     }
                 }
             )
+        })
+    }
+
+    deleteEvent = (id) => {
+        return new Promise((resolve, reject) => {
+            this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, 
+                id, 
+                (error) => {
+
+                    if (error) {
+                        reject({Msg: error.message})
+                    } else {
+                        resolve(true);
+                    }
+            })
         })
     }
 }

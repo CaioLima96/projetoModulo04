@@ -1,37 +1,118 @@
+//const valoresDao = require("../dao/valoresDao")
+
 /*
 Esse arquivo deve ser executado apenas uma vez para que a o banco seja criado e populado
 */
 const {v4: uuid} = require("uuid")
 const sqlite3 = require('sqlite3').verbose();
 const sha256 = require("js-sha256")
-const db = new sqlite3.Database('src/infra/database.db');
+const db = new sqlite3.Database('./database.db');
 
+
+let id_address1 = uuid();
+let id_address2 = uuid();
+let id_address3 = uuid();
 
 //===== USERS
+const USERS_SCHEMA = `
+CREATE TABLE IF NOT EXISTS "users" (
+    "id" CHAR(36) PRIMARY KEY,
+    "nome" varchar(100),
+    "email" VARCHAR(80),
+    "senha" CHAR(50),
+    "cpf" INTEGER(11),
+    "id_address" CHAR(36),
+    FOREIGN KEY(id_address) REFERENCES address(id)
+  );
+`
+let user_id_1 = uuid();
+let user_id_2 = uuid();
+let user_id_3 = uuid();
 
-const USERS_SCHEMA = ``
+let user_senha_1 = sha256((Math.random() + 1).toString(36). substring(2));
+let user_senha_2 = sha256((Math.random() + 1).toString(36).substring(2));
+let user_senha_3 = sha256((Math.random() + 1).toString(36).substring(2));
 
-const ADD_USERS_DATA = ``
+const ADD_USERS_DATA = `
+INSERT INTO users (id, nome, email, senha, cpf, id_address)
+VALUES 
+    ('${user_id_1}', 'Maria Silva', 'mariasilva@gmail.com', '${user_senha_1}', 12345678911,'${id_address1}'),
+    ('${user_id_2}', 'Lívia Caroline Raquel Sales', 'liviacarolineraquelsales_@metalplasma.com.br', '${user_senha_2}', 12312312311,'${id_address2}'),
+    ('${user_id_3}', 'Julio Edson Fernando Nascimento', 'julioedsonfernandonascimento@sp.gov.br', '${user_senha_3}', 12332112311,'${id_address3}')
+`
 
 function criaTabelaUser() {
     db.run(USERS_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de usuários", error);
+       if (error) console.log("Erro ao criar tabela de usuarios", error);
     });
 }
 
 function populaTabelaUser() {
     db.run(ADD_USERS_DATA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de usuários", error);
+       if (error) console.log("Erro ao popular tabela de usuarios", error);
     });
 }
 
 
 
+//=====ADRESS
+const ADDRESS_SCHEMA = `
+CREATE TABLE IF NOT EXISTS "address" (
+    "id" CHAR(36) PRIMARY KEY,
+    "cep" INTERGER,
+    "logradouro" varchar(100),
+    "numero" INTEGER(5),
+    "complemento" varchar(50),
+    "bairro" varchar(50),
+    "cidade" VARCHAR(50),
+    "estado" VARCHAR(30),
+    "pais" varchar(30)
+  );
+`
+
+const ADD_ADDRESS_DATA = `
+INSERT INTO address (id, cep, logradouro, numero, complemento, bairro, cidade, estado, pais)
+VALUES 
+    ( '${id_address1}', 39404188, 'Rua Vinte e Nove', 50, '---', 'Jaragua', 'Montes Claros', 'MG', 'BRASIL'),
+    ( '${id_address2}', 69917764, 'Rua Manoel Gadelha', 20, '---', 'Conjunto Universitario', 'Rio Branco', 'AC', 'BRASIL'),
+    ( '${id_address3}', 58301070, 'Rua Minas Gerais', 404, '---', 'Popular', 'Santa Rita', 'PB', 'BRASIL')
+`
+
+function criaTabelaAddress() {
+    db.run(ADDRESS_SCHEMA, (error)=> {
+       if (error) console.log("Erro ao criar tabela de endereco", error);
+    });
+}
+
+function populaTabelaAddress() {
+    db.run(ADD_ADDRESS_DATA, (error)=> {
+       if (error) console.log("Erro ao popular tabela de enderecos", error);
+    });
+}
+
+
 //===== STAFF
-const STAFF_SCHEMA = ``
+const STAFF_SCHEMA = `
+CREATE TABLE IF NOT EXISTS "staff" (
+    "id" CHAR(36) PRIMARY KEY,
+    "nome" varchar(150),
+    "cargo" varchar(25)
+  );
+`
 
-const ADD_STAFF_DATA = ``
+let id_staff1 = uuid();
+let id_staff2 = uuid();
+let id_staff3 = uuid();
+let id_staff4 = uuid();
 
+const ADD_STAFF_DATA = `
+INSERT INTO staff (id, nome, cargo)
+VALUES 
+    ( '${id_staff1}', 'Fábio Almeida', 'Recepcionista'),
+    ( '${id_staff2}', 'David Fernando', 'Camareiro'),
+    ( '${id_staff3}', 'Lara Silva', 'Gerente'),
+    ( '${id_staff4}', 'Carlos José', 'Recepcionista')
+`
 function criaTabelaStaff() {
     db.run(STAFF_SCHEMA, (error)=> {
        if (error) console.log("Erro ao criar tabela de staff", error);
@@ -66,7 +147,7 @@ room_id_3 = uuid();
 room_id_4 = uuid();
 
 const ADD_ROOM_DATA = `
-    INSERT INTO rooms (id, tipo_de_quarto, numero, qtd__max_pessoas, andar, status, valor_quarto)
+    INSERT INTO rooms (id, tipo_de_quarto, numero, qtd_max_pessoas, andar, status, valor_quarto)
     VALUES 
         ('${room_id_1}', 'casal simples', 010, 02, 01, 'livre', 300.00),
         ('${room_id_2}', 'triplo', 022, 03, 02, 'Ocupado', 400.00),
@@ -117,7 +198,7 @@ const ADD_EVENT_DATA = `
 
         ('${event_id_2}', 'Festa tradicional da cidade', '2022-02-13 13:00:00', '2022-02-16 22:00:00', 180, 60.00, 'Livre', 'Venha comemorar o aniversário da nossa cidade com comidas típicas e muito mais.', '3 dias', 'Salão'),
 
-        ('${event_id_3}', 'Eventos corporativos', '2022-03-14 15:00:00', 2022-03-18 20:00:00', 400, 200.00, '18+', 'Atividades como convenções, treinamentos, reuniões e kick-off.', '4 dias', 'Salão'),
+        ('${event_id_3}', 'Eventos corporativos', '2022-03-14 15:00:00', '2022-03-18 20:00:00', 400, 200.00, '18+', 'Atividades como convenções, treinamentos, reuniões e kick-off.', '4 dias', 'Salão'),
 
         ('${event_id_4}', 'Cursos e workshops', '2022-03-20 10:00:00', '2022-04-05 16:00:00', 400, 150.00, '14+', 'Dursos e workshops de gastronomia com chefs renomados', '17 dias', 'Salão')
 `
@@ -145,7 +226,7 @@ const EXPERIENCES_SCHEMA = `
         "valor_exp" DECIMAL(6,2),
         "horario" DATETIME,
         "duracao" VARCHAR(15),
-        "local_experience" VARCHAR(15),
+        "local_experience" VARCHAR(25),
         "dia_semana" VARCHAR(50),
         "qtd_pessoas" INTEGER(5),
         "descricao" VARCHAR(500)
@@ -163,7 +244,7 @@ const ADD_EXPERIENCES_DATA = `
 
         ('${exp_id_2}', 'Jantar à luz de vela', 2500.00, '20:00:00', '1:30:00', 'Jardim do hotel', 'sexta, sabado, domingo', 02, 'Não há nada melhor do que celebrar um sentimento tão lindo como o amor! O Jantar à luz de velas é servido em espaço exclusivo no jardim do hotel – um ambiente com flores, árvores e parreiras!'),
 
-        ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.')
+        ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'Jardim','segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.')
 `
 
 function criaTabelaExperience() {
@@ -194,7 +275,8 @@ const USER_EVENT_SCHEMA = `
 const  ADD_USER_EVENT_DATA = `
     INSERT INTO user_events (user_id, event_id)
     VALUES
-        ()
+        ('${user_id_1}','${event_id_1}'),
+        ('${user_id_2}','${event_id_2}')
 
 `
 
@@ -226,7 +308,8 @@ const USER_EXPERIENCE_SCHEMA =  `
 const  ADD_USER_EXPERIENCE_DATA = `
     INSERT INTO user_experiences (user_id, experience_id)
     VALUES
-        ()
+        ('${user_id_1}','${exp_id_1}'),
+        ('${user_id_2}','${exp_id_2}')
 `
 
 function criaTabelaUserExperience() {
@@ -245,9 +328,35 @@ function populaTabelaUserExperience() {
 
 //===== BOOKING
 
-const BOOKING_SCHEMA = ``
+//let bookTotal = valoresDao
 
-const  ADD_BOOKING_DATA = ``
+const BOOKING_SCHEMA =  `
+CREATE TABLE IF NOT EXISTS "booking" (
+    "id" CHAR(36) PRIMARY KEY,
+    "id_user" CHAR(36),
+    "id_room" CHAR(36),
+    "qtd_pessoas" VARCHAR(2),
+    "data_entrada" DATETIME, 
+    "data_saida"  DATETIME,
+    "user_event_id" CHAR(36),
+    "user_experience_id" CHAR(36),
+    "valor_total" INTERGER,
+    FOREIGN KEY(id_user) REFERENCES users(id),
+    FOREIGN KEY(id_room) REFERENCES room(id),
+    FOREIGN KEY(user_event_id) REFERENCES users_event(id),
+    FOREIGN KEY(user_experience_id) REFERENCES users_experience(id)
+);
+`
+
+let id_booking1 = uuid();
+let id_booking2 = uuid();
+
+
+const  ADD_BOOKING_DATA = ` INSERT INTO booking (id, id_user, id_room, qtd_pessoas, data_entrada, data_saida, user_event_id, user_experience_id, valor_total)
+VALUES
+    ('${id_booking1}','${user_id_1}','${room_id_1}','2','2022-03-21 12:00:00','2022-03-21 14:00:00','${event_id_1}','${exp_id_1}', 150),
+    ('${id_booking2}','${user_id_2}','${room_id_2}','4','2022-03-23 08:00:00','2022-03-23 10:00:00','${event_id_2}','${exp_id_1}', 200)
+    `
 
 function criaTabelaBooking() {
     db.run(BOOKING_SCHEMA, (error)=> {
@@ -265,28 +374,47 @@ function populaTabelaBooking() {
 
 //===== PAYMENT
 
-const PAYMENT_SCHEMA = ``
+const PAYMENT_SCHEMA = `
+CREATE TABLE IF NOT EXISTS "payment" (
+    "id" CHAR(36) PRIMARY KEY,
+    "id_user" CHAR(36),
+    "id_staff" CHAR(36),
+    "valor_total" DECIMAL(6,2),
+    FOREIGN KEY(id_user) REFERENCES users(id),
+    FOREIGN KEY(id_staff) REFERENCES staff(id)
+  );
+`
+// uuid dos ID 
+let id_pay1 = uuid();
+let id_pay2 = uuid();
+let id_pay3 = uuid();
 
-const ADD_PAYMENT_DATA = ``
+const ADD_PAYMENT_DATA = `
+INSERT INTO payment (id, id_user, id_staff, valor_total)
+VALUES 
+    ( '${id_pay1}', '${user_id_1}', '${id_staff1}', 200),
+    ( '${id_pay2}', '${user_id_2}', '${id_staff2}', 60),
+    ( '${id_pay3}', '${user_id_3}', '${id_staff3}', 200)
+`
 
 function criaTabelaPayment() {
-    db.run(ADD_PAYMENT_DATA, (error)=> {
-       if (error) console.log("Erro ao criar tabela de payment", error);
+    db.run(PAYMENT_SCHEMA, (error)=> {
+       if (error) console.log("Erro ao criar tabela de pagamentos", error);
     });
 }
 
 function populaTabelaPayment() {
-    db.run(PAYMENT_SCHEMA, (error)=> {
-       if (error) console.log("Erro ao popular tabela de payment", error);
+    db.run(ADD_PAYMENT_DATA, (error)=> {
+       if (error) console.log("Erro ao popular tabela de pagamentos", error);
     });
 }
-
-
-
 
 db.serialize( ()=> {
     criaTabelaUser()
     populaTabelaUser()
+
+    criaTabelaAddress()
+    populaTabelaAddress()
 
     criaTabelaStaff()
     populaTabelaStaff()

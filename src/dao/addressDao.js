@@ -2,7 +2,7 @@ const bd = require('../infra/sqlite-db');
 const { ADDRESS_TABLE: TABLE} = require('../utils/appConfig')
 
 
-class ExperienceDao {
+class AddressDao {
     constructor(dbConn) {
         this.dbConn = dbConn
     }

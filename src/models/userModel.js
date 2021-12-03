@@ -3,12 +3,12 @@ const sha256 = require("js-sha256");
 
 
 class UserModel {
-    constructor(nome,email,senha,CPF,id_adress) {
+    constructor(nome,email,senha,cpf,id_adress) {
             this.id = uuid(),
             this.nome = nome,
             this.email = email,
             this.senha = sha256(senha),
-            this.CPF = CPF,
+            this.cpf = cpf,
             this.id_adress = id_adress
     }
 }
