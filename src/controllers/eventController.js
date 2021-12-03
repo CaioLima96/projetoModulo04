@@ -111,7 +111,7 @@ class EventController {
 
             await this.dbConn.updateEvent(id, content)
 
-            res.status(200).send({ mensagem: "Evento atualizado com sucesso"})
+            res.status(200).send({mensagem: "Evento atualizado com sucesso"})
 
         } catch (error) {
 
@@ -147,7 +147,7 @@ class EventController {
             await this.dbConn
             .deleteEvent(req.params.id)
 
-            res.status(200).send({ mensagem: "Evento apagado com sucesso"})
+            res.status(200).send({mensagem: "Evento apagado com sucesso"})
 
         } catch (error) {
 

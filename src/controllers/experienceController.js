@@ -16,7 +16,7 @@ class ExperienceController {
             
             await this.dbConn.saveExperience(experience)
 
-            res.status(201).send({menssage: "Experiência salva com sucesso"})
+            res.status(201).send({mensagem: "Experiência salva com sucesso"})
 
         } catch (error) {
 
@@ -107,7 +107,7 @@ class ExperienceController {
 
             await this.dbConn.updateExperience(id, content)
 
-            res.status(200).send({ mensagem: "Experiência atualizada com sucesso"})
+            res.status(200).send({mensagem: "Experiência atualizada com sucesso"})
 
         } catch (error) {
             
@@ -143,7 +143,7 @@ class ExperienceController {
             
             await this.dbConn.deleteExperience(req.params.id)
 
-            res.status(200).send({ mensagem: "Experiência apagada com sucesso"})
+            res.status(200).send({mensagem: "Experiência apagada com sucesso"})
 
         } catch (error) {
             
