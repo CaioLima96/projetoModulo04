@@ -12,11 +12,8 @@ const bookingRouter = require("./bookingRouter");
 const addressRouter = require("./addressRouter");
 
 
-
 //middleware
 router.use(cors());
-
-
 
 // ROTAS
 
