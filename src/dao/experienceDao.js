@@ -23,7 +23,7 @@ class ExperienceDao {
 				(error) => {
 
 					if (error) {
-						reject({Msg: error.message});
+						reject({Msg: error.message})
 					} else {
 						resolve(true);
 					}
@@ -92,7 +92,8 @@ class ExperienceDao {
 
     deleteExperience = (id) => {
         return new Promise((resolve, reject) => {
-			this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, id, 
+			this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`,
+			id, 
 			(error) => {
 				
 				if (error) {

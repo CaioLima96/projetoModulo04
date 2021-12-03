@@ -6,6 +6,6 @@ module.exports = AppConfiguration = {
     PAYMENT_TABLE: 'PAYMENT',
     STAFF_TABLE: 'STAFF',
     ROOM_TABLE: 'ROOM',
-    EVENT_TABLE: 'EVENT',
+    EVENT_TABLE: 'EVENTS',
     EXPERIENCES_TABLE: 'EXPERIENCES',
 }
