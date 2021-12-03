@@ -1,6 +1,5 @@
 const AddressModel = require('../models/addressModel')
 const AddressDao = require('../dao/addressDao')
-
 const {addressDB} = require('../infra/bd')
 
 class AddressController {

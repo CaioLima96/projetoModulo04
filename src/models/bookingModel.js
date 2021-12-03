@@ -1,4 +1,5 @@
 const { v4: uuid } = require("uuid");
+//const ValorDao = require("../dao/valoresDao")
 
 class BookingModel {
     constructor(id_user, id_room, qtd_pessoas, data_entrada, data_saida, valor_total) {
@@ -10,6 +11,7 @@ class BookingModel {
         this.data_saida = data_saida,
         this.valor_total = valor_total
     }
+
 }
 
 module.exports = BookingModel
