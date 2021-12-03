@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const cors = require("cors");
 
 const experienceRouter = require("./experienceRouter");
 const roomRouter = require("./roomRouter");
@@ -9,6 +10,11 @@ const userRouter = require("./userRouter");
 const staffRouter = require("./staffRouter");
 const bookingRouter = require("./bookingRouter");
 const addressRouter = require("./addressRouter");
+
+
+
+//middleware
+router.use(cors());
 
 
 
