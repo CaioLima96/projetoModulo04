@@ -9,9 +9,9 @@ class PaymentController {
     }
 
     save = async (req, res) => {
-        const {id_user, id_staff, valor_total} = req.body;
+        const {id_user, id_booking, id_staff, valor_total} = req.body;
 
-        const payment = new PaymentModel(id_user, id_staff, valor_total)
+        const payment = new PaymentModel(id_user, id_booking, id_staff, valor_total)
 
         try {
             
@@ -83,7 +83,10 @@ class PaymentController {
 
             if(content.id_user == null ) {
                 content.id_user = paymentUpIndex.id_user
-            }   
+            }
+            if(content.id_booking == null){
+                content.id_booking = paymentUpIndex.id_booking
+            }
             if(content.id_staff == null ) {
                 content.id_staff = paymentUpIndex.id_staff
             }

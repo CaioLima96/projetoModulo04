@@ -41,9 +41,10 @@ class PaymentDao {
     savePayment = (pay) => {
         return new Promise((resolve, reject) => {
           this.dbConn.run(
-            `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?)`,
+            `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?)`,
             pay.id,
             pay.id_user,
+            pay.id_booking,
             pay.id_staff,
             pay.valor_total,
             (error) => {
