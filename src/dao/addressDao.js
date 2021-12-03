@@ -7,15 +7,38 @@ class AddressDao {
         this.dbConn = dbConn
     }
 
-    getAddressyId = (id) => {
+    saveAddress = (address) => {
+        return new Promise((resolve, reject) => {
+            this.dbConn.run(
+                `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                address.id,
+                address.cep,
+                address.logradouro,
+                address.numero,
+                address.complemento,
+                address.bairro,
+                address.cidade,
+                address.estado,
+                address.pais,
+                (error) => {
+                    if (error) {
+                        reject({ Msg: error.message });
+                    } else {
+                        resolve(true);
+                    }
+                }
+            );
+        });
+    }
+
+    getAddressById = (id) => {
         return new Promise((resolve, reject) => {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE} WHERE id like ?`,
                 id,
                 (error, results) => {
-                    console.log("Endereço unico retornado com sucesso")
                     if(error) {
-                        reject("Error: " + error)
+                        reject({ Msg: error.message })
                     } else {
                         resolve(results)
                     }
@@ -29,9 +52,8 @@ class AddressDao {
             this.dbConn.all(
                 `SELECT * FROM ${TABLE}`,
                 (error, results) => {
-                    console.log("Todos os Endereço retornados com sucesso")
                     if(error) {
-                        reject("Error: " + error)
+                        reject({ Msg: error.message })
                     } else {
                         resolve(results)
                     }
@@ -40,51 +62,10 @@ class AddressDao {
         })
     }
 
-    saveAddress = (address) => {
-        return new Promise((resolve, reject) => {
-            this.dbConn.run(
-                `INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                address.id,
-                address.cep,
-                address.logradouro,
-                address.numero,
-                address.complemento,
-                address.bairro,
-                address.cidade,
-                address.estado,
-                address.pais,
-                (error) => {
-                    console.log("Rota post feita com sucesso")
-                    if (error) {
-                        reject("Error: " + error);
-                    } else {
-                        resolve(true);
-                    }
-                }
-            );
-        });
-    }
-
-    deleteAddress = (id) => {
-        return new Promise((resolve, reject) => {
-          this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, 
-            id, 
-            (error) => {
-                console.log("Rota delete feita com sucesso")
-                if (error) {
-                reject(error);
-                } else {
-                resolve(true);
-                }
-          })
-        })
-    }
-    
     updateAddress = (id, address) => {
         return new Promise((resolve, reject) => {
             this.dbConn.run(
-                `UPDATE ${TABLE} SET id = ?. cep = ?, logradouro = ?, numero = ?, complemento = ?, bairro =?, cidade = ?, estado = ?, pais = ? WHERE id = ?`, 
-                address.id,
+                `UPDATE ${TABLE} SET cep = ?, logradouro = ?, numero = ?, complemento = ?, bairro =?, cidade = ?, estado = ?, pais = ? WHERE id = ?`, 
                 address.cep,
                 address.logradouro,
                 address.numero,
@@ -95,14 +76,27 @@ class AddressDao {
                 address.pais,
                 id,
                 (error) => {
-                    console.log("Rota update feita com sucesso")
                     if (error) {
-                        reject(error);
+                        reject({ Msg: error.message });
                     } else {
                         resolve(true);
                     }
                 }
             )
+        })
+    }
+
+    deleteAddress = (id) => {
+        return new Promise((resolve, reject) => {
+          this.dbConn.run(`DELETE FROM ${TABLE} WHERE id = ?`, 
+            id, 
+            (error) => {
+                if (error) {
+                reject({ Msg: error.message });
+                } else {
+                resolve(true);
+                }
+          })
         })
     }
 }

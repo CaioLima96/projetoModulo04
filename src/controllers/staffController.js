@@ -1,11 +1,31 @@
 const StaffModel = require('../models/staffModel')
 const StaffDao = require('../dao/staffDao')
-
-const {staffDB} = require('../infra/bd')
+const {staffMemoryDB} = require('../infra/bd')
 
 class StaffController {
     constructor(dbConn) {
         this.dbConn = dbConn
+    }
+
+    save = async (req, res) => {
+
+        const {nome, cargo} = req.body;
+
+        const staff = new StaffModel(nome, cargo)
+
+        try {
+            
+            await this.dbConn.saveStaff(staff)
+
+            res.status(201).send({mensagem: "Funcionário cadastrado com sucesso!"})
+
+        } catch (error) {
+
+            res.status(500).json(error)
+        }
+
+        // this.dbConn.push(staff)
+        // res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
     }
 
     show = async (req, res) => {
@@ -15,23 +35,17 @@ class StaffController {
             let staffShow = await this.dbConn.getStaffById(req.params.id)
 
             if(staffShow.length == 0) {
-                
-                console.log("Funcionário não existente")
-                res.status(500).send({mensagem: "Funcionário não existente."})
+
+                res.status(500).send({mensagem: "Funcionário não existe."})
 
             } else {
 
-                console.log(staffShow,`\nRota GET "unica" feita com sucesso`)
-
-                res.status(200).send({data: staffShow, menssagem: "Funcionário encontrado!"})
-                
+                res.status(200).send(staffShow)
             }
 
         } catch (error) {
 
-            console.log('Erro da requisição: ' + error)
             res.status(500).json(error)
-
         }
 
         // this.dbConn.forEach((staff) => {
@@ -46,65 +60,17 @@ class StaffController {
 
         try {
             
-            let staffIndex = await this.dbConn.getAllEvents()
+            let staffIndex = await this.dbConn.getAllStaff()
             
-            res.status(200).send({data: staffIndex, mensagem: "Funcionários retornados!"})
+            res.status(200).send(staffIndex)
             
         } catch (error) {
 
-            console.log('Erro da requisição: ' + error)
             res.status(500).json(error)
         }
 
 
         //res.send(this.dbConn)
-    }
-
-    save = async (req, res) => {
-        const {id, nome, cargo} = req.body;
-
-        const staff = new staffModel(id, nome, cargo)
-
-        try {
-            
-            await this.dbConn.saveStaff(staff)
-
-            res.status(201).send({menssage: "Funcionário cadastrado com sucesso!"})
-
-        } catch (error) {
-            
-            console.log('Erro da requisição: ' + error)
-
-            res.status(500).json(error)
-
-        }
-
-        // this.dbConn.push(staff)
-        // res.send("Rota POST de tarefa ativada: tarefa adicionada ao banco de dados")
-    }
-
-    remove = async (req, res) => {
-
-        try {
-            
-            await this.dbConn
-            .deleteStaff(req.params.id)
-
-            res.status(200).send({ mensagem: "Funcinário apagado"})
-
-        } catch (error) {
-
-            console.log('Erro da requisição: ' + error)
-            res.status(500).json(error)
-
-        }
-        
-        // const id = req.params.id
-        // this.dbConn = this.dbConn.filter((i) => {
-            
-        //     return i.id !== id;
-        // })
-        // res.send(`Menssagem: ${id} apagado com sucesso`)
     }
 
     update = async (req, res) => {
@@ -115,25 +81,20 @@ class StaffController {
             
             let staffUpIndex = await this.dbConn.getStaffById(id)[0]
 
-            // if(content.id == null ) {
-            //     content.id = eventUpIndex.id
-            // }
-
             if(content.nome == null ) {
-                content.nome = eventUpIndex.nome
+                content.nome = staffUpIndex.nome
             }
             if(content.cargo == null ) {
-                content.cargo = eventUpIndex.cargo
+                content.cargo = staffUpIndex.cargo
             }
 
             await this.dbConn.updateStaff(id, content)
 
-            res.status(200).send({ mensagem: "Informações do Funciionários atualizadas"})
+            res.status(200).send({mensagem: "Funcionário atualizado com sucesso."})
 
         } catch (error) {
 
             res.status(500).json(error)
-
         }
 
         // const id = req.params.id
@@ -146,6 +107,28 @@ class StaffController {
         // }
         // res.send(`Task: ${id} modificado com sucesso`)
     }
+
+    remove = async (req, res) => {
+
+        try {
+            
+            await this.dbConn
+            .deleteStaff(req.params.id)
+
+            res.status(200).send({mensagem: "Funcinário apagado"})
+
+        } catch (error) {
+
+            res.status(500).json(error)
+        }
+        
+        // const id = req.params.id
+        // this.dbConn = this.dbConn.filter((i) => {
+            
+        //     return i.id !== id;
+        // })
+        // res.send(`Menssagem: ${id} apagado com sucesso`)
+    }
 }
 
-module.exports = new StaffController(staffDB)
+module.exports = new StaffController(StaffDao)

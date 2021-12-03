@@ -1,9 +1,9 @@
 //"puxa" o express
 const express = require('express');
 const app = express();
+const cors = require('cors')
 
 //Porta que o app vai ser rodado
-//const {PORT = 3000} = process.env.PORT;
 const {PORT} = require('./utils/appConfig')
 
 
