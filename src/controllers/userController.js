@@ -11,9 +11,9 @@ class userController {
     }
 
     save = async (req, res) => {
-        const { nome, email, senha, CPF, id_address } = req.body;
+        const { nome, email, senha, cpf, id_address } = req.body;
 
-        const user = new UserModel(nome, email, senha, CPF, id_address)
+        const user = new UserModel(nome, email, senha, cpf, id_address)
 
         try {
 
@@ -81,24 +81,27 @@ class userController {
 
         try {
 
-            let userUpIndex = await this.dbConn.getUserById(id)[0]
+            let userUpIndex = await this.dbConn.getUserById(id)
 
             if (content.nome == null) {
-                content.nome = userUpIndex.nome
+                content.nome = userUpIndex[0].nome
             }
             if (content.email == null) {
-                content.email = userUpIndex.email
-            }
+                content.email = userUpIndex[0].email
+            } 
             if (content.senha == null) {
-                content.senha = userUpIndex.senha
+                content.senha = userUpIndex[0].senha
             }
-            if (content.CPF == null) {
-                content.CPF = userUpIndex.CPF
+            else if (content.senha !== null) {
+                content.senha = sha256(content.senha)
+            }
+            if (content.cpf == null) {
+                content.cpf = userUpIndex[0].cpf
             }
             if (content.id_address == null) {
-                content.id_address = userUpIndex.id_address
+                content.id_address = userUpIndex[0].id_address
             }
-
+            
             await this.dbConn.updateUser(id, content)
 
             res.status(200).send({ mensagem: "Usuário atualizado com sucesso!" })
