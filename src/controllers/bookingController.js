@@ -1,36 +1,51 @@
 const BookingModel = require('../models/bookingModel')
 const BookingDao = require('../dao/bookingDao')
 
-const {bookingDB} = require('../infra/bd')
+//const {bookingDB} = require('../infra/bd')
 
 class BookingController {
     constructor(dbConn) {
         this.dbConn = dbConn
     }
 
+    save = async (req, res) => {
+        const { id_user, id_room, qtd_pessoas, data_entrada, data_saida, valor_total } = req.body;
+
+        const booking = new BookingModel(id_user, id_room, qtd_pessoas, data_entrada, data_saida, valor_total)
+
+        try {
+
+            await this.dbConn.saveBooking(booking)
+
+            res.status(201).send({menssagem: "Reserva salva com sucesso" })
+
+        } catch (error) {
+
+            res.status(500).json(error)
+        }
+
+        // this.dbConn.push(booking)
+        // res.send("Rota POST de reserva ativada: reserva adicionada ao banco de dados")
+    }
+
+
     show = async (req, res) => {
-        
+
         try {
 
             let bookShow = await this.dbConn.getBookingById(req.params.id)
 
-            if(bookShow.length == 0) {
+            if (bookShow.length == 0) {
 
-                console.log("Reserva não existe.")
                 res.status(500).send({mensagem: "Reserva não existe."})
 
             } else {
 
-                console.log(bookShow,`\nRota GET "unica" feita com sucesso`)
-
-                res.status(200).send({data: bookShow, menssagem: "Reserva retornada com sucesso"})
-                
+                res.status(200).send(bookShow)
             }
         } catch (error) {
 
-            console.log('Erro da requisição: ' + error)
             res.status(500).json(error)
-
         }
 
         // this.dbConn.forEach((book) => {
@@ -44,108 +59,54 @@ class BookingController {
     index = async (req, res) => {
 
         try {
-            
+
             let bookIndex = await this.dbConn.getAllBookings()
 
-            res.status(200).send({data: bookIndex, mensagem: "Reservas retornadas com sucesso"})
+            res.status(200).send(bookIndex)
 
         } catch (error) {
-            
-            console.log('Erro da requisição: ' + error)
+
             res.status(500).json(error)
         }
 
         // res.send(this.dbConn)
     }
 
-    save = async (req, res) => {
-        const {id_user, id_room, qtd_pessoas, data_entrada, data_saida, user_event_id, user_experience_id, valor_total} = req.body;
-
-        const booking = new BookingModel(id_user, id_room, qtd_pessoas, data_entrada, data_saida, user_event_id, user_experience_id, valor_total)
-
-        try {
-            
-            await this.dbConn.saveBooking(booking)
-
-            res.status(201).send({menssage: "Reserva salva com sucesso"})
-
-        } catch (error) {
-            
-            console.log('Erro da requisição: ' + error)
-
-            res.status(500).json(error)
-
-        }
-
-        // this.dbConn.push(booking)
-        // res.send("Rota POST de reserva ativada: reserva adicionada ao banco de dados")
-    }
-
-    remove = async (req, res) => {
-
-        try {
-            
-            await this.dbConn.deleteBooking(req.params.id)
-
-            res.status(200).send({ mensagem: "Reserva apagada com sucesso"})
-
-        } catch (error) {
-            
-            console.log('Erro da requisição: ' + error)
-            res.status(500).json(error)
-
-        }
-        
-        // const id = req.params.id
-        // this.dbConn = this.dbConn.filter((i) => {
-            
-        //     return i.id !== id;
-        // })
-        // res.send(`Menssagem: ${id} apagado com sucesso`)
-    }
-
     update = async (req, res) => {
         const id = req.params.id;
         const content = req.body;
-        
+
         try {
-            
+
             let bookUpIndex = await this.dbConn.getBookingById(id)[0]
 
-            if(content.id_user == null){
+            if (content.id_user == null) {
                 content.id_user = bookUpIndex.id_user
             }
-            if(content.id_room == null) {
+            if (content.id_room == null) {
                 content.id_room = bookUpIndex.id_room
             }
-            if(content.qtd_pessoas == null) {
+            if (content.qtd_pessoas == null) {
                 content.qtd_pessoas = bookUpIndex.qtd_pessoas
             }
-            if(content.data_entrada == null) {
+            if (content.data_entrada == null) {
                 content.data_entrada = bookUpIndex.data_entrada
             }
-            if(content.user_event_id == null) {
-                content.user_event_id = bookUpIndex.user_event_id
-            }
-            if(content.data_saida == null) {
+            if (content.data_saida == null) {
                 content.data_saida = bookIndex.data_saida
             }
-            if(content.user_experience_id == null) {
-                content.user_experience_id = bookUpIndex.user_experience_id
-            }
-            if(content.valor_total == null) {
+            if (content.valor_total == null) {
                 content.valor_total = bookUpIndex.valor_total
             }
             await this.dbConn.updateBooking(id, content)
 
-            res.status(200).send({ mensagem: "Reserva atualizada com sucesso"})
+            res.status(200).send({mensagem: "Reserva atualizada com sucesso"})
 
         } catch (error) {
-            
+
             res.status(500).json(error)
 
         }
-
 
         // let bookingObj = {
         //     id: id,
@@ -167,6 +128,32 @@ class BookingController {
 
         // res.send(`Task: ${id} modificado com sucesso`)
     }
+
+
+    remove = async (req, res) => {
+
+        try {
+
+            await this.dbConn.deleteBooking(req.params.id)
+
+            res.status(200).send({ mensagem: "Reserva apagada com sucesso" })
+
+        } catch (error) {
+
+            console.log('Erro da requisição: ' + error)
+            res.status(500).json(error)
+
+        }
+
+        // const id = req.params.id
+        // this.dbConn = this.dbConn.filter((i) => {
+
+        //     return i.id !== id;
+        // })
+        // res.send(`Menssagem: ${id} apagado com sucesso`)
+    }
+
+
 }
 
 module.exports = new BookingController(BookingDao)
