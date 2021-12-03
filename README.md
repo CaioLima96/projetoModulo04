@@ -15,9 +15,9 @@ npm install
 
 ***
 ## 🏩 Execução do projeto:
-- Depois de instalar todas as dependências, você deve executar o arquivo de banco de dados:
+- Depois de instalar todas as dependências, você deve executar o arquivo de banco de dados. Entra na pasta infra pelo terminal e execute:
 ```bash
-node src/infra/create-and-populate.js
+node create-and-populate.js
 ```
 - Você já pode executar o projeto e assim o servidor local já estará rodando:
 ```bash
