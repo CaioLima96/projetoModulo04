@@ -20,3 +20,5 @@ app.use("/", router);
 
 //porta
 app.listen(PORT);
+
+module.exports = app;
