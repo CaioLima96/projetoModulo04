@@ -10,7 +10,7 @@ class RoomDao {
 	saveRoom = (room) => {
         return new Promise((resolve, reject) => {
 			this.dbConn.run(
-				`INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?)`,
+				`INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
 				room.id,
 				room.tipo_de_quarto,
 				room.numero,
@@ -18,6 +18,7 @@ class RoomDao {
 				room.andar,
 				room.status,
 				room.valor_quarto,
+                room.url,
 				(error) => {
 
 					if (error) {

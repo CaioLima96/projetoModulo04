@@ -10,7 +10,7 @@ class ExperienceDao {
 	saveExperience = (exp) => {
         return new Promise((resolve, reject) => {
 			this.dbConn.run(
-				`INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+				`INSERT INTO ${TABLE} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 				exp.id,
 				exp.nome,
 				exp.valor_exp,
@@ -20,6 +20,7 @@ class ExperienceDao {
 				exp.dia_semana,
 				exp.qtd_pessoas,
 				exp.descricao,
+				exp.url,
 				(error) => {
 
 					if (error) {
@@ -68,7 +69,7 @@ class ExperienceDao {
     updateExperience = (id, exp) => {
         return new Promise((resolve, reject) => {
 			this.dbConn.run(
-				`UPDATE ${TABLE} SET nome = ?, valor_exp = ?, horario = ?, duracao = ?, local_experience = ?, dia_semana = ?, qtd_pessoas = ?, descricao = ? WHERE id = ?`, 
+				`UPDATE ${TABLE} SET nome = ?, valor_exp = ?, horario = ?, duracao = ?, local_experience = ?, dia_semana = ?, qtd_pessoas = ?, descricao = ?, url = ? WHERE id = ?`, 
 				exp.nome,
 				exp.valor_exp,
 				exp.horario,
@@ -77,6 +78,7 @@ class ExperienceDao {
 				exp.dia_semana,
 				exp.qtd_pessoas,
 				exp.descricao,
+				exp.url,
 				id,
 				(error) => {
 				

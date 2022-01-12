@@ -1,7 +1,7 @@
 const { v4: uuid } = require("uuid");
 
 class EventModel {
-    constructor(nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event) {
+    constructor(nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event, url) {
         this.id = uuid(),
         this.nome = nome,
         this.data_inicio = data_inicio,
@@ -11,7 +11,8 @@ class EventModel {
         this.faixa_etaria = faixa_etaria,
         this.descricao = descricao,
         this.duracao = duracao,
-        this.local_event = local_event
+        this.local_event = local_event,
+        this.url = url
     }
 }
 

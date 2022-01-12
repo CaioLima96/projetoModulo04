@@ -1,7 +1,7 @@
 const { v4: uuid } = require("uuid");
 
 class ExperienceModel {
-    constructor(nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao) {
+    constructor(nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao, url) {
         this.id = uuid(),
         this.nome = nome,
         this.valor_exp = valor_exp,
@@ -9,8 +9,9 @@ class ExperienceModel {
         this.duracao = duracao,
         this.local_experience = local_experience,
         this.dia_semana = dia_semana,
-        this.qtd_pessoas = qtd_pessoas
-        this.descricao = descricao
+        this.qtd_pessoas = qtd_pessoas,
+        this.descricao = descricao,
+        this.url = url
     }
 }
 

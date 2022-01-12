@@ -8,9 +8,9 @@ class EventController {
     }
 
     save = async (req, res) => {
-        const {nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event } = req.body;
+        const {nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event, url } = req.body;
 
-        const event = new EventModel(nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event)
+        const event = new EventModel(nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event, url)
 
         try {
             
@@ -107,6 +107,9 @@ class EventController {
             }
             if(content.local_event == null ) {
                 content.local_event = eventUpIndex.local_event
+            }
+            if(content.url == null ) {
+                content.url = eventUpIndex.url
             }
 
             await this.dbConn.updateEvent(id, content)

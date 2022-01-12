@@ -137,7 +137,8 @@ const ROOM_SCHEMA = `
         "qtd_max_pessoas" INTEGER(6) ,
         "andar" INTEGER(2),
         "status" VARCHAR(100),
-        "valor_quarto" DECIMAL(6,2)
+        "valor_quarto" DECIMAL(6,2),
+        "url" VARCHAR(250)
     );
 `
 
@@ -147,12 +148,12 @@ room_id_3 = uuid();
 room_id_4 = uuid();
 
 const ADD_ROOM_DATA = `
-    INSERT INTO rooms (id, tipo_de_quarto, numero, qtd_max_pessoas, andar, status, valor_quarto)
+    INSERT INTO rooms (id, tipo_de_quarto, numero, qtd_max_pessoas, andar, status, valor_quarto, url)
     VALUES 
-        ('${room_id_1}', 'casal simples', 010, 02, 01, 'livre', 300.00),
-        ('${room_id_2}', 'triplo', 022, 03, 02, 'Ocupado', 400.00),
-        ('${room_id_3}', 'duplo', 014, 02, 01, 'Ocupado', 300.00),
-        ('${room_id_4}', 'casal luxo', 101, 02, 10, 'Livre', 800.00)
+        ('${room_id_1}', 'casal simples', 010, 02, 01, 'livre', 300.00, 'https://i.imgur.com/GI7hGv2.jpg'),
+        ('${room_id_2}', 'triplo', 022, 03, 02, 'Ocupado', 400.00, 'https://i.imgur.com/LaC9OMo.jpg'),
+        ('${room_id_3}', 'duplo', 014, 02, 01, 'Ocupado', 300.00, 'https://i.imgur.com/FeqPMTa.jpg'),
+        ('${room_id_4}', 'casal luxo', 101, 02, 10, 'Livre', 800.00, 'https://i.imgur.com/I5DaH09.jpg')
 `
 
 function criaTabelaRoom() {
@@ -182,7 +183,8 @@ const EVENT_SCHEMA = `
         "faixa_etaria" VARCHAR(2),
         "descricao" VARCHAR(500),
         "duracao" VARCHAR(15),
-        "local_event" VARCHAR(50)
+        "local_event" VARCHAR(50),
+        "url" VARCHAR(250)
     );
 `
 
@@ -192,12 +194,12 @@ event_id_3 = uuid()
 event_id_4 = uuid()
 
 const ADD_EVENT_DATA = `
-    INSERT INTO events (id, nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event)
+    INSERT INTO events (id, nome, data_inicio, data_fim, qtd_pessoas, valor_event, faixa_etaria, descricao, duracao, local_event, url)
     VALUES 
-        ('${event_id_1}', 'Colônia de férias', '2022-01-05 10:30:00', '2022-01-15 10:30:00', 280, 200.00, '12+', 'Atividades programadas, recreativas esportiva e, jantares em família.', '10 dias', 'Área externa'),
-        ('${event_id_2}', 'Festa tradicional da cidade', '2022-02-13 13:00:00', '2022-02-16 22:00:00', 180, 60.00, 'Livre', 'Venha comemorar o aniversário da nossa cidade com comidas típicas e muito mais.', '3 dias', 'Salão'),
-        ('${event_id_3}', 'Eventos corporativos', '2022-03-14 15:00:00', '2022-03-18 20:00:00', 400, 200.00, '18+', 'Atividades como convenções, treinamentos, reuniões e kick-off.', '4 dias', 'Salão'),
-        ('${event_id_4}', 'Cursos e workshops', '2022-03-20 10:00:00', '2022-04-05 16:00:00', 400, 150.00, '14+', 'Dursos e workshops de gastronomia com chefs renomados', '17 dias', 'Salão')
+        ('${event_id_1}', 'Colônia de férias', '2022-01-05 10:30:00', '2022-01-15 10:30:00', 280, 200.00, '12+', 'Atividades programadas, recreativas esportiva e, jantares em família.', '10 dias', 'Área externa', 'https://i.imgur.com/unVsGZ6.jpg'),
+        ('${event_id_2}', 'Festa tradicional da cidade', '2022-02-13 13:00:00', '2022-02-16 22:00:00', 180, 60.00, 'Livre', 'Venha comemorar o aniversário da nossa cidade com comidas típicas e muito mais.', '3 dias', 'Salão', 'https://i.imgur.com/ZdaqMEE.jpg'),
+        ('${event_id_3}', 'Eventos corporativos', '2022-03-14 15:00:00', '2022-03-18 20:00:00', 400, 200.00, '18+', 'Atividades como convenções, treinamentos, reuniões e kick-off.', '4 dias', 'Salão', 'https://i.imgur.com/4LWwGZ5.jpg'),
+        ('${event_id_4}', 'Cursos e workshops', '2022-03-20 10:00:00', '2022-04-05 16:00:00', 400, 150.00, '14+', 'Dursos e workshops de gastronomia com chefs renomados', '17 dias', 'Salão', 'https://i.imgur.com/fY2a2Js.jpg')
 `
 
 function criaTabelaEvent() {
@@ -226,7 +228,8 @@ const EXPERIENCES_SCHEMA = `
         "local_experience" VARCHAR(25),
         "dia_semana" VARCHAR(50),
         "qtd_pessoas" INTEGER(5),
-        "descricao" VARCHAR(500)
+        "descricao" VARCHAR(500),
+        "url" VARCHAR(250)
     );
 `
 
@@ -235,11 +238,11 @@ exp_id_2 = uuid()
 exp_id_3 = uuid()
 
 const ADD_EXPERIENCES_DATA = `
-    INSERT INTO experiences (id, nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao)
+    INSERT INTO experiences (id, nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao, url)
     VALUES 
-        ('${exp_id_1}', 'Massagem Facial', 300.00, '10:00:00', '1h20min', 'SPA', 'fds', 02, 'Deliciosa e completa massagem corporal relaxante. Acompanha alongamento na região do pescoço promovendo uma melhora nas tensões. Um momento de bem-estar dos pés à cabeça.'),
-        ('${exp_id_2}', 'Jantar à luz de vela', 2500.00, '20:00:00', '1:30:00', 'Jardim do hotel', 'sexta, sabado, domingo', 02, 'Não há nada melhor do que celebrar um sentimento tão lindo como o amor! O Jantar à luz de velas é servido em espaço exclusivo no jardim do hotel – um ambiente com flores, árvores e parreiras!'),
-        ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'Jardim','segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.')
+        ('${exp_id_1}', 'Massagem Facial', 300.00, '10:00:00', '1h20min', 'SPA', 'fds', 02, 'Deliciosa e completa massagem corporal relaxante. Acompanha alongamento na região do pescoço promovendo uma melhora nas tensões. Um momento de bem-estar dos pés à cabeça.', 'https://i.imgur.com/4g6j68h.jpg'),
+        ('${exp_id_2}', 'Jantar à luz de vela', 2500.00, '20:00:00', '1:30:00', 'Jardim do hotel', 'sexta, sabado, domingo', 02, 'Não há nada melhor do que celebrar um sentimento tão lindo como o amor! O Jantar à luz de velas é servido em espaço exclusivo no jardim do hotel – um ambiente com flores, árvores e parreiras!', 'https://i.imgur.com/hZhHgqc.jpg'),
+        ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'Jardim','segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.', 'https://i.imgur.com/8e3mevl.jpg')
 `
 
 function criaTabelaExperience() {

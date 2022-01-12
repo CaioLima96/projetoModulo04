@@ -8,9 +8,9 @@ class ExperienceController {
     }
 
     save = async (req, res) => {
-        const {nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao} = req.body;
+        const {nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao, url} = req.body;
 
-        const experience = new ExperienceModel(nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao)
+        const experience = new ExperienceModel(nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao, url)
 
         try {
             
@@ -103,6 +103,9 @@ class ExperienceController {
             }
             if(content.descricao == null) {
                 content.descricao = expUpIndex.descricao
+            }
+            if(content.url == null) {
+                content.url = expUpIndex.url
             }
 
             await this.dbConn.updateExperience(id, content)
