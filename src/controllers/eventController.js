@@ -21,6 +21,7 @@ class EventController {
         } catch (error) {
             
             res.status(500).json(error)
+            console.log(res.status(500).json(error))
         }
 
         // this.dbConn.push(event)

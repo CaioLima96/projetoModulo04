@@ -240,9 +240,9 @@ exp_id_3 = uuid()
 const ADD_EXPERIENCES_DATA = `
     INSERT INTO experiences (id, nome, valor_exp, horario, duracao, local_experience, dia_semana, qtd_pessoas, descricao, url)
     VALUES 
-        ('${exp_id_1}', 'Massagem Facial', 300.00, '10:00:00', '1h20min', 'SPA', 'fds', 02, 'Deliciosa e completa massagem corporal relaxante. Acompanha alongamento na região do pescoço promovendo uma melhora nas tensões. Um momento de bem-estar dos pés à cabeça.', 'https://i.imgur.com/4g6j68h.jpg'),
-        ('${exp_id_2}', 'Jantar à luz de vela', 2500.00, '20:00:00', '1:30:00', 'Jardim do hotel', 'sexta, sabado, domingo', 02, 'Não há nada melhor do que celebrar um sentimento tão lindo como o amor! O Jantar à luz de velas é servido em espaço exclusivo no jardim do hotel – um ambiente com flores, árvores e parreiras!', 'https://i.imgur.com/hZhHgqc.jpg'),
-        ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'Jardim','segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.', 'https://i.imgur.com/8e3mevl.jpg')
+        ('${exp_id_1}', 'Massagem Facial', 300.00, '10:00:00', '1h20min', 'SPA', 'fds', 02, 'Deliciosa e completa massagem corporal relaxante. Acompanha alongamento na região do pescoço promovendo uma melhora nas tensões. Um momento de bem-estar dos pés à cabeça.', 'https://i.imgur.com/hZhHgqc.jpg'),
+        ('${exp_id_2}', 'Jantar à luz de vela', 2500.00, '20:00:00', '1:30:00', 'Jardim do hotel', 'sexta, sabado, domingo', 02, 'Não há nada melhor do que celebrar um sentimento tão lindo como o amor! O Jantar à luz de velas é servido em espaço exclusivo no jardim do hotel – um ambiente com flores, árvores e parreiras!', 'https://i.imgur.com/8e3mevl.jpg'),
+        ('${exp_id_3}', 'Chá da tarde', 90.00, '17:00:00', '1:00:00', 'Jardim','segunda à sexta', 05, 'O maravilhoso Chá das Cinco serve sabor e elegância em uma agradável experiência. Na mesa posta, doçuras e ternuras criam memórias afetivas durante um delicioso momento de partilha.', 'https://i.imgur.com/krLiG8v.jpg')
 `
 
 function criaTabelaExperience() {
